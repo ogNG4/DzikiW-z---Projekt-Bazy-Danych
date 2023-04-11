@@ -20,16 +20,21 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
-
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Link } from "@chakra-ui/next-js";
 
+import { Logo } from "../Logo/Logo";
+
+
 export function UserNavbar() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const supabase = useSupabaseClient();
+  const session = useSession();
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")} px={8}>
-      <Flex h={20} alignItems={"center"} justifyContent={"space-between"}>
+    <Box bg={useColorModeValue("gray.100", "gray.900")}  px={8}>
+      <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"} >
         <IconButton
           size={"md"}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -37,16 +42,16 @@ export function UserNavbar() {
           display={{ md: "none" }}
           onClick={isOpen ? onClose : onOpen}
         />
+        <Logo />
         <HStack spacing={8} alignItems={"center"} fontSize={"lg"}>
-        <Link href="/">Dziki wóz</Link>
-          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+          <HStack as={"nav"} spacing={{sm:'4rem', md: '6rem', lg: '8rem'}} display={{ base: "none", md: "flex" }} fontWeight={'500'} fontSize={'1.7rem'} >
             <Link href="/">O nas</Link>
             <Link href="/flota">Flota</Link>
             <Link href="/">Kontakt</Link>
           </HStack>
         </HStack>
         <Flex alignItems={"center"}>
-          {/* <Menu>
+      {  session ?    (<Menu>
             <MenuButton
               as={Button}
               rounded={"full"}
@@ -67,18 +72,20 @@ export function UserNavbar() {
               <MenuDivider />
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />
-              <MenuItem>Link 3</MenuItem>
+              <MenuItem>
+              <Button onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
+              </MenuItem>
             </MenuList>
-          </Menu> */}
-
-          <Button
+          </Menu>) : (<Button
             onClick={() => router.push("/login")}
             color={"gray.300"}
-            bg={"green.500"} 
+            bg={"red.400"}
             size={{ base: "sm", md: "md" }}
           >
             <Text>Zaloguj się</Text>
-          </Button>
+          </Button>)}
+
+          
         </Flex>
       </Flex>
       {isOpen ? (
