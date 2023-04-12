@@ -47,7 +47,7 @@ export function UserNavbar() {
           <HStack as={"nav"} spacing={{sm:'4rem', md: '6rem', lg: '8rem'}} display={{ base: "none", md: "flex" }} fontWeight={'500'} fontSize={'1.7rem'} >
             <Link href="/">O nas</Link>
             <Link href="/flota">Flota</Link>
-            <Link href="/">Kontakt</Link>
+            <Link href="/contact">Kontakt</Link>
           </HStack>
         </HStack>
         <Flex alignItems={"center"}>

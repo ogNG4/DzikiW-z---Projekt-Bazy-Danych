@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 
+import {supabase } from "@/lib/supabase";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider} from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
