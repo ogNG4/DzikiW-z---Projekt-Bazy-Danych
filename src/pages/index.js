@@ -1,3 +1,5 @@
+import HomePage from "@/components/Layout/User/HomePage/HomePage";
+
 export default function Home() {
-  return <h1>Siema</h1>;
+  return (<HomePage/>);
 }

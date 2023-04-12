@@ -18,13 +18,15 @@ useEffect(() => {
 }, [session, router]);
 
   return (
-    <Box w={{ base: '90%', md: '70%', lg: '50%', xl: '40%', '2xl': '30%'}} margin={'5rem auto'} bg={'gray.700'} p={'2rem'} borderRadius={'1rem'}>
+    <Box minH={'70vh'} >
+    <Box w={{ base: '90%', md: '70%', lg: '50%', xl: '40%', '2xl': '30%'}} mt={'10rem'} mx={'auto'} bg={'gray.700'} p={'2rem'} borderRadius={'1rem'} >
       {!session ? (
         <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
       ) : (
         <p>Account page will go here.</p>
       )}
 
+</Box>
 </Box>
     
   

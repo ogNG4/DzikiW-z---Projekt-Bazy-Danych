@@ -33,7 +33,7 @@ export function UserNavbar() {
   const supabase = useSupabaseClient();
   const session = useSession();
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")}  px={8}>
+    <Box bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'10'} width={'100%'}>
       <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"} >
         <IconButton
           size={"md"}
@@ -82,7 +82,7 @@ export function UserNavbar() {
             bg={"red.400"}
             size={{ base: "sm", md: "md" }}
           >
-            <Text>Zaloguj się</Text>
+            <Text >Zaloguj się</Text>
           </Button>)}
 
           
@@ -91,9 +91,9 @@ export function UserNavbar() {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as={"nav"} spacing={4}>
-            <Link href="/">About</Link>
-            <Link href="/">About</Link>
-            <Link href="/">About</Link>
+          <Link href="/">O nas</Link>
+            <Link href="/flota">Flota</Link>
+            <Link href="/contact">Kontakt</Link>
           </Stack>
         </Box>
       ) : null}

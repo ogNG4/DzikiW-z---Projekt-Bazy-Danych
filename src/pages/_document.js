@@ -4,7 +4,9 @@ import { ColorModeScript } from '@chakra-ui/react'
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head >
+        <title>Dziki Wóz</title>
+        </Head>
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode}></ColorModeScript>
         <Main />
