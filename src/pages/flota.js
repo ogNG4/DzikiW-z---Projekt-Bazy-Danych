@@ -17,7 +17,7 @@ export default function Cars() {
   return (
     <>
       <h1>Flota</h1>
-      <ul style={{margin: '5rem', height:'100vh'}}>
+      <ul style={{margin: '5rem',  height:'100vh'}}>
         {cars.map((car) => (
           <li key={car.id}>
             {car.brand} {car.model} {car.capacity}
