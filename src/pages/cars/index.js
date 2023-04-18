@@ -1,9 +1,11 @@
+import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+
+import CarCard from "@/components/UI/CarCard";
 
 export default function Cars() {
   const [cars, setCars] = useState([]);
 
-  // pobieramy samochody z bazy danych przy pomocy funkcji getCarsHandler i ustawiamy je w stanie
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("../api/getCars");
@@ -13,18 +15,32 @@ export default function Cars() {
 
     fetchData();
   }, []);
-  
+
   return (
-    <>
-      <h1>Flota</h1>
-      <ul style={{margin: '5rem',  height:'100vh'}}>
+    <Flex
+      minH={"100vh"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      my={"8rem"}
+      p={'2rem'}
+      width={'100%'}
+    >
+      <Box w={"max-content"}>
+        <Text
+          fontSize={{ base: "1.6rem", md: "2.7rem" }}
+          fontWeight={"400"}
+          textTransform={"uppercase"}
+          letterSpacing={"5px"}
+        >
+          Flota
+        </Text>
+      </Box>
+      <Grid templateColumns={{base: '1fr', md:'1fr 1fr ', lg:"1fr 1fr 1fr", xl:" 1fr 1fr 1fr 1fr"}} gap={6} mt={"3rem"} p={"1rem"}>
         {cars.map((car) => (
-          <li key={car.id}>
-            {car.brand} {car.model} {car.capacity}
-          </li>
+            <CarCard key={car.id} car={car} />
         ))}
-      </ul>
-    </>
+            
+        </Grid>
+    </Flex>
   );
 }
-

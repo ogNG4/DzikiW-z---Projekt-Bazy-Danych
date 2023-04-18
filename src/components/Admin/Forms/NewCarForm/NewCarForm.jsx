@@ -54,9 +54,9 @@ export default function NewCarForm({ onSubmit }) {
           </NumberInput>
           <FormLabel>Typ</FormLabel>
           <Select type="text" name="type" id="type" required>
-            <option value="sport">Sportowy</option>
-            <option value="hatchback">Hatchback</option>
-            <option value="combi">Kombi</option>
+            <option value="Sportowy">Sportowy</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Combi">Kombi</option>
           </Select>
           <FormLabel>Rocznik</FormLabel>
           <Select type="number" name="year" id="year" required>
@@ -67,12 +67,17 @@ export default function NewCarForm({ onSubmit }) {
             <option value="2018">2018</option>
           </Select>
           <FormLabel>Kolor</FormLabel>
-          <Input type="text" name="color" id="color" required />
+          <Select type="text" name="color" id="color" required>
+            <option value="Czarny">Czarny</option>
+            <option value="Biały">Biały</option>
+            <option value="Czerwony">Czerwony</option>
+            <option value="Szary">Szary</option>
+            <option value="Zielony">Zielony</option>
+          </Select>
           <FormLabel>Cena za dobę</FormLabel>
           <NumberInput name="price" id="price" required>
             <NumberInputField />
           </NumberInput>
-
           <FormLabel>Skrzynia biegów</FormLabel>
           <Select type="text" name="transmission" id="transmission" required>
             <option value="automatic">Automatyczna</option>

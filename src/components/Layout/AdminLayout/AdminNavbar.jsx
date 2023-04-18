@@ -36,7 +36,7 @@ export function AdminNavbar() {
       top={'0'}
       left={'0'}
       zIndex={'10'}
-      mr={'4rem'}
+      
       
     >
       <Flex flexDirection={"column"} justifyContent={"space-between"}>
@@ -48,7 +48,7 @@ export function AdminNavbar() {
           onClick={isOpen ? onClose : onOpen}
         />
 
-        <Accordion allowToggle mt={"3rem"}>
+        <Accordion allowToggle mt={"3rem"} marginBottom={'2rem'}>
           <AccordionItem>
             <h2>
               <AccordionButton>
@@ -61,7 +61,7 @@ export function AdminNavbar() {
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
                 <Link href="/">Lista pojazdów</Link>
-                <Link href="/newCar">Dodaj pojazd</Link>
+                <Link href="/admin/newCar">Dodaj pojazd</Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>
@@ -118,7 +118,7 @@ export function AdminNavbar() {
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
-        <Button onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
+        <Button bg={'red.400'} onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
       </Flex>
     </Box>
   );

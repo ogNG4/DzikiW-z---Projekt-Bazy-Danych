@@ -40,7 +40,7 @@ function MainImage() {
       </Flex>
 
       <Box position={"absolute"} bottom={{ base: "2rem", md: "5rem" }}>
-        <Link href="/flota">
+        <Link href="/cars">
           <Button
             bg={"red.400"}
             fontSize={{ base: ".8rem", md: "1.2rem" }}

@@ -1,8 +1,18 @@
 import NewCarForm from "../../components/Admin/Forms/NewCarForm/NewCarForm";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAdmin } from "@/context/AuthContext";
 
 export default function NewCar(){
+
+    const isAdmin = useAdmin();
     const router = useRouter();
+
+    useEffect(() => {
+        !isAdmin ? router.replace("/") : null;
+    }, []);
+
+   
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
