@@ -10,7 +10,7 @@ export const AdminProvider = ({ children }) => {
 
   useEffect(() => {
     if (session?.user) {
-      // Użytkownik jest zalogowany, sprawdzamy jego uprawnienia
+ 
       supabase
         .from("profiles")
         .select("isAdmin")
@@ -23,7 +23,7 @@ export const AdminProvider = ({ children }) => {
           }
         });
     } else {
-      // Użytkownik nie jest zalogowany, ustawiamy isAdmin na false
+   
       setIsAdmin(false);
     }
 

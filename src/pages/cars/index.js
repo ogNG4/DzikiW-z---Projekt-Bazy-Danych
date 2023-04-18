@@ -1,29 +1,17 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 import CarCard from "@/components/UI/CarCard";
 
-export default function Cars() {
-  const [cars, setCars] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("../api/getCars");
-      const data = await response.json();
-      setCars(data);
-    }
-
-    fetchData();
-  }, []);
-
+export default function Cars({ cars }) {
   return (
     <Flex
       minH={"100vh"}
       flexDirection={"column"}
       alignItems={"center"}
       my={"8rem"}
-      p={'2rem'}
-      width={'100%'}
+      p={"2rem"}
+      width={"100%"}
     >
       <Box w={"max-content"}>
         <Text
@@ -35,12 +23,40 @@ export default function Cars() {
           Flota
         </Text>
       </Box>
-      <Grid templateColumns={{base: '1fr', md:'1fr 1fr ', lg:"1fr 1fr 1fr", xl:" 1fr 1fr 1fr 1fr"}} gap={6} mt={"3rem"} p={"1rem"}>
+      <Grid
+        templateColumns={{
+          base: "1fr",
+          md: "1fr 1fr ",
+          lg: "1fr 1fr 1fr",
+          xl: " 1fr 1fr 1fr 1fr",
+        }}
+        gap={6}
+        mt={"3rem"}
+        p={"1rem"}
+      >
         {cars.map((car) => (
-            <CarCard key={car.id} car={car} />
+          <CarCard key={car.id} car={car} />
         ))}
-            
-        </Grid>
+      </Grid>
     </Flex>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const { data, error } = await supabase.from("cars").select("*");
+
+    return {
+      props: {
+        cars: data,
+      },
+
+      revalidate: 60,
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      notFound: true,
+    };
+  }
 }
