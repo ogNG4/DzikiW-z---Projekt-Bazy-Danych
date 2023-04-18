@@ -36,6 +36,7 @@ export function AdminNavbar() {
       top={'0'}
       left={'0'}
       zIndex={'10'}
+      mr={'4rem'}
       
     >
       <Flex flexDirection={"column"} justifyContent={"space-between"}>

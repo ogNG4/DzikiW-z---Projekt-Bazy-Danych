@@ -4,7 +4,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useAdmin } from "@/context/AuthContext";
+import { useAdmin } from "../../context/AuthContext";
 
 import { Skeleton, Stack } from "@chakra-ui/react";
 

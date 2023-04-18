@@ -6,7 +6,7 @@ export default function Cars() {
   // pobieramy samochody z bazy danych przy pomocy funkcji getCarsHandler i ustawiamy je w stanie
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api/getCars");
+      const response = await fetch("../api/getCars");
       const data = await response.json();
       setCars(data);
     }
@@ -27,6 +27,4 @@ export default function Cars() {
     </>
   );
 }
-
-
 

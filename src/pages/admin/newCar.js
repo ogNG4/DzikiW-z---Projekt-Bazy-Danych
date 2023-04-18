@@ -1,4 +1,4 @@
-import NewCarForm from "@/components/Admin/Forms/NewCarForm/NewCarForm";
+import NewCarForm from "../../components/Admin/Forms/NewCarForm/NewCarForm";
 import { useRouter } from "next/router";
 
 export default function NewCar(){
@@ -11,7 +11,7 @@ export default function NewCar(){
             formData[key] = value;
         }
         try {
-            const response = await fetch("/api/newCar", {
+            const response = await fetch("../api/newCar", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -20,7 +20,7 @@ export default function NewCar(){
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                router.push("/");
+                alert('dodano nowy samochód');
             } else {
                 console.error(response);
             }

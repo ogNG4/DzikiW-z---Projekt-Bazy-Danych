@@ -1,5 +1,5 @@
 
-import ContactForm from "@/components/User/ContactForm/ContactForm";
+import ContactForm from "../../components/User/ContactForm/ContactForm";
 import { useRouter } from "next/router";
 export default function Contact() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function Contact() {
     }
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("../api/contact", {
         method: "POST",
         headers: {
           Accept: "application/json",

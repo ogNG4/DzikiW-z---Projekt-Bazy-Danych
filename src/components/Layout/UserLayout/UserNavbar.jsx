@@ -46,7 +46,7 @@ export function UserNavbar() {
         <HStack spacing={8} alignItems={"center"} fontSize={"lg"}>
           <HStack as={"nav"} spacing={{sm:'4rem', md: '6rem', lg: '8rem'}} display={{ base: "none", md: "flex" }} fontWeight={'500'} fontSize={'1.7rem'} >
             <Link href="/">O nas</Link>
-            <Link href="/flota">Flota</Link>
+            <Link href="/cars">Flota</Link>
             <Link href="/contact">Kontakt</Link>
           </HStack>
         </HStack>
@@ -92,7 +92,7 @@ export function UserNavbar() {
         <Box pb={4} display={{ md: "none" }}>
           <Stack as={"nav"} spacing={4}>
           <Link href="/">O nas</Link>
-            <Link href="/flota">Flota</Link>
+            <Link href="/cars">Flota</Link>
             <Link href="/contact">Kontakt</Link>
           </Stack>
         </Box>
