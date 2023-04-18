@@ -1,103 +1,124 @@
 import {
-    useColorMode,
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Switch,
-    useColorModeValue,
-    useDisclosure,
-    HStack,
-    Stack,
-    Menu,
-    MenuButton,
-    Avatar,
-    MenuList,
-    MenuItem,
-    MenuDivider,
-    Spacer,
-  } from "@chakra-ui/react";
-  import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-  import { useRouter } from "next/router";
-  import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-  import { Link } from "@chakra-ui/next-js";
-  
-  import { Logo } from "../Logo/Logo";
-  
-  
-  export function AdminNavbar() {
-    // const { colorMode, toggleColorMode } = useColorMode();
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const router = useRouter();
-    const supabase = useSupabaseClient();
-    const session = useSession();
-    return (
-      <Box bg={useColorModeValue("gray.100", "gray.900")}  px={8}>
-        <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"} >
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          {/* <Logo /> */}
-          <HStack spacing={8} alignItems={"center"} fontSize={"lg"}>
-            <HStack as={"nav"} spacing={{sm:'4rem', md: '6rem', lg: '8rem'}} display={{ base: "none", md: "flex" }} fontWeight={'500'} fontSize={'1.7rem'} >
-              <Link href="/">Admin</Link>
-              <Link href="/flota">Admin</Link>
-              <Link href="/">Admint</Link>
-            </HStack>
-          </HStack>
-          <Flex alignItems={"center"}>
-        {  session ?    (<Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"md"}
-                  bg={"gray.600"}
-                  src={
-                    "https://pixabay.com/images/id-973460/"
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>
-                <Button onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
-                </MenuItem>
-              </MenuList>
-            </Menu>) : (<Button
-              onClick={() => router.push("/login")}
-              color={"gray.300"}
-              bg={"red.400"}
-              size={{ base: "sm", md: "md" }}
-            >
-              <Text>Zaloguj się</Text>
-            </Button>)}
-  
-            
-          </Flex>
-        </Flex>
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              <Link href="/">About</Link>
-              <Link href="/">About</Link>
-              <Link href="/">About</Link>
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
-    );
-  }
-  
+  useColorMode,
+  Box,
+  Flex,
+  IconButton,
+  Button,
+  useColorModeValue,
+  useDisclosure,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/router";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { Link } from "@chakra-ui/next-js";
+
+import { Logo } from "../Logo/Logo";
+
+export function AdminNavbar() {
+  // const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const supabase = useSupabaseClient();
+
+  return (
+    <Box
+      bg={useColorModeValue("gray.100", "gray.900")}
+      p={8}
+      w={"30%"}
+      maxW={"350px"}
+      h={"100vh"}
+      borderRight={"1px solid gray"}
+      position={'fixed'}
+      top={'0'}
+      left={'0'}
+      zIndex={'10'}
+      
+    >
+      <Flex flexDirection={"column"} justifyContent={"space-between"}>
+        <IconButton
+          size={"md"}
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          aria-label={"Open Menu"}
+          display={{ md: "none" }}
+          onClick={isOpen ? onClose : onOpen}
+        />
+
+        <Accordion allowToggle mt={"3rem"}>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left">
+                  Flota
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Flex flexDirection={"column"}>
+                <Link href="/">Lista pojazdów</Link>
+                <Link href="/newCar">Dodaj pojazd</Link>
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left">
+                  Rezerwacje
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Flex flexDirection={"column"}>
+                <Link href="/">Aktualne rezerwacje</Link>
+                <Link href="/">Zakończone rezerwacje</Link>
+                <Link href="/">Historia rezerwacji</Link>
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left">
+                  Wiadomości
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Flex flexDirection={"column"}>
+                <Link href="/">Wiadomości nieodczytane</Link>
+                <Link href="/">Wiadomości odczytane</Link>
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left">
+                  Finanse
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Flex flexDirection={"column"}>
+                <Link href="/">Samochód</Link>
+                <Link href="/">Flota</Link>
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+        <Button onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
+      </Flex>
+    </Box>
+  );
+}

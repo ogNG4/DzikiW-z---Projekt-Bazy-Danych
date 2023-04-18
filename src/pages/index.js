@@ -1,5 +1,17 @@
-import HomePage from "@/components/Layout/User/HomePage/HomePage";
+import HomePage from "../components/User/HomePage/HomePage";
+import { UserLayout } from "@/components/Layout/UserLayout/UserLayout";
+import { useEffect } from "react";
+import { useAdmin } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  return (<HomePage/>);
+
+  const isAdmin = useAdmin();
+  const router = useRouter();
+
+  useEffect(() => {
+    isAdmin ? router.push("/admin") : null;
+  }, []);
+
+  return <HomePage />;
 }

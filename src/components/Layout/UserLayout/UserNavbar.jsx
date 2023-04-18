@@ -33,8 +33,8 @@ export function UserNavbar() {
   const supabase = useSupabaseClient();
   const session = useSession();
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'10'} width={'100%'}>
-      <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"} >
+    <Box  bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'10'} width={'100%'}>
+      <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"}  >
         <IconButton
           size={"md"}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
