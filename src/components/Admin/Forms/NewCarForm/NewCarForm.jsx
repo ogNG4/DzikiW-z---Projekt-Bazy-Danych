@@ -37,29 +37,29 @@ export default function NewCarForm({ onSubmit }) {
           textAlign={"center"}
         >
           <FormLabel>Marka</FormLabel>
-          <Select type="text" name="brand" id="brand" required>
+          <Select type="text" name="brand" id="brand" placeholder=' ' required>
             <option value="Bmw">BMW</option>
             <option value="Audi">Audi</option>
             <option value="Mercedes">Mercedes</option>
           </Select>
           <FormLabel>Model</FormLabel>
           <Input type="text" name="model" id="model" required />
-          <FormLabel>Pojemność (cm3)</FormLabel>
+          <FormLabel>Pojemność </FormLabel>
           <NumberInput name="capacity" id="capacity" required>
-            <NumberInputField />
+            <NumberInputField placeholder="cm3" />
           </NumberInput>
-          <FormLabel>Moc (KM)</FormLabel>
+          <FormLabel>Moc </FormLabel>
           <NumberInput name="power" id="power" required>
-            <NumberInputField />
+            <NumberInputField placeholder='KM' />
           </NumberInput>
           <FormLabel>Typ</FormLabel>
-          <Select type="text" name="type" id="type" required>
+          <Select type="text" name="type" id="type" placeholder='' required>
             <option value="Sportowy">Sportowy</option>
             <option value="Hatchback">Hatchback</option>
             <option value="Combi">Kombi</option>
           </Select>
           <FormLabel>Rocznik</FormLabel>
-          <Select type="number" name="year" id="year" required>
+          <Select type="number" name="year" id="year" placeholder='' required>
             <option value="2022">2022</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
@@ -79,12 +79,12 @@ export default function NewCarForm({ onSubmit }) {
             <NumberInputField />
           </NumberInput>
           <FormLabel>Skrzynia biegów</FormLabel>
-          <Select type="text" name="transmission" id="transmission" required>
+          <Select type="text" name="transmission" id="transmission"  required>
             <option value="automatic">Automatyczna</option>
             <option value="manual">Manualna</option>
           </Select>
 
-          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
+          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"} >
             Wyślij
           </Button>
         </FormControl>

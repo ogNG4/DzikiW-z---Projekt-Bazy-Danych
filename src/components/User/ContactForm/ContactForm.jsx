@@ -6,11 +6,14 @@ import {
     Textarea,
     Button,
     Box,
-    Text
+    Text,
+  
   } from "@chakra-ui/react";
   
   export default function ContactForm({ onSubmit }) {
+   
     return (
+      <>
         <Box minH={'75vh'} mt={'10rem'}>
         <Text
           margin={"2rem auto"}
@@ -55,5 +58,6 @@ import {
           </FormControl>
         </Flex>
       </Box>
+      </>
     );
   }

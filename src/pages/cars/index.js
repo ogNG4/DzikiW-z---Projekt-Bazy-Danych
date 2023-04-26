@@ -44,7 +44,7 @@ export default function Cars({ cars }) {
 
 export async function getStaticProps() {
   try {
-    const { data, error } = await supabase.from("cars").select("*");
+    const {data} = await supabase.from("cars").select("*");
 
     return {
       props: {
@@ -53,8 +53,8 @@ export async function getStaticProps() {
 
       revalidate: 60,
     };
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
     return {
       notFound: true,
     };

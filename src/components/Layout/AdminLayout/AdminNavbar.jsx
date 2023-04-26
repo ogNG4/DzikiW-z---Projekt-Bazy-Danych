@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import {  useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Link } from "@chakra-ui/next-js";
 
 import { Logo } from "../Logo/Logo";
@@ -23,6 +23,12 @@ export function AdminNavbar() {
   // const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const supabase = useSupabaseClient();
+  const router = useRouter();
+
+  const logoutHandler = () => {
+    supabase.auth.signOut();
+    router.replace("/");
+  };
 
   return (
     <Box
@@ -118,7 +124,7 @@ export function AdminNavbar() {
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
-        <Button bg={'red.400'} onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
+        <Button bg={'red.400'} onClick={logoutHandler}>Wyloguj się</Button>
       </Flex>
     </Box>
   );
