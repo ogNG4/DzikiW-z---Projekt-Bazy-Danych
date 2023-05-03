@@ -2,11 +2,8 @@ import { Card, Text, Flex, Box } from "@chakra-ui/react";
 
 export default function MessageCard({ message }) {
     const date = new Date(message.created_at);
-<<<<<<< HEAD
     const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear().toString()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-=======
-    const formattedDate = ${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear().toString()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')};
->>>>>>> 8616ef7afcb3828db243b630ac44bb8515708ea4
+
 
     return (
         <Card w={'60%'} minH={'20vh'}>
