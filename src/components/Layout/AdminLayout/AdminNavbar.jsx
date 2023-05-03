@@ -101,7 +101,7 @@ export function AdminNavbar() {
             </h2>
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/">Wiadomości nieodczytane</Link>
+                <Link href="/admin/unread-messages">Wiadomości nieodczytane</Link>
                 <Link href="/">Wiadomości odczytane</Link>
               </Flex>
             </AccordionPanel>

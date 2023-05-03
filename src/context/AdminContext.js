@@ -26,7 +26,7 @@ export const AdminProvider = ({ children }) => {
       setIsAdmin(false);
     }
 
-    console.log(isAdmin)
+    // console.log(isAdmin)
   }, [session, supabase]);
 
   return (
