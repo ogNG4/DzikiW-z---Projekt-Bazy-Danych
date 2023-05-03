@@ -38,7 +38,7 @@ export function AdminNavbar() {
       maxW={"350px"}
       h={"100vh"}
       borderRight={"1px solid gray"}
-      position={'fixed'}
+      position={'sticky'}
       top={'0'}
       left={'0'}
       zIndex={'10'}

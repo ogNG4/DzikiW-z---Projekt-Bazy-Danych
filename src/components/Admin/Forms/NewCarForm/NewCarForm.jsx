@@ -14,9 +14,9 @@ import {
 
 export default function NewCarForm({ onSubmit }) {
   return (
-    <Box minH={"75vh"} mt={"10rem"}>
+    <Box minH={"75vh"} mt={"5rem"}>
       <Text
-        margin={"2rem auto"}
+        margin={"auto"}
         width={"max-content"}
         fontSize={{ base: "2rem", md: "3rem" }}
         fontWeight={"500"}
@@ -24,8 +24,9 @@ export default function NewCarForm({ onSubmit }) {
         Dodaj pojazd
       </Text>
       <Flex
-        w={{ base: "90%", md: "70%", lg: "50%", xl: "40%", "2xl": "30%" }}
-        margin={"5rem auto"}
+        w={'auto'}
+        maxW={'600px'}
+        margin={"2rem auto"}
         bg={"gray.700"}
         p={"1.5rem"}
         borderRadius={"1rem"}
@@ -36,6 +37,8 @@ export default function NewCarForm({ onSubmit }) {
           onSubmit={onSubmit}
           textAlign={"center"}
         >
+          {/* <FormLabel>Zdjęcie</FormLabel>
+          <Input type="file" name="photo" /> */}
           <FormLabel>Marka</FormLabel>
           <Select type="text" name="brand" id="brand" placeholder=' ' required>
             <option value="Bmw">BMW</option>
