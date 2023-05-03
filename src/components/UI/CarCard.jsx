@@ -3,7 +3,7 @@ export default function CarCard({ car }) {
   return (
     <Box
       bg={"whiteAlpha.100"}
-      h={{ base: "30vh", md: "35vh", lg: "50vh" }}
+      h={'auto'}
       w={"100%"}
     >
       <Flex flexDirection={"column"}>

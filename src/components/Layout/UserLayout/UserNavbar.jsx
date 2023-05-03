@@ -32,8 +32,16 @@ export function UserNavbar() {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const session = useSession();
+
+  const logoutHandler = () => {
+    supabase.auth.signOut();
+    router.push('/');
+  };
+
+
+
   return (
-    <Box  bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'10'} width={'100%'}>
+    <Box  bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'12'} width={'100%'}>
       <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"}  >
         <IconButton
           size={"md"}
@@ -73,11 +81,11 @@ export function UserNavbar() {
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />
               <MenuItem>
-              <Button onClick={() => supabase.auth.signOut()}>Wyloguj się</Button>
+              <Button onClick={logoutHandler }>Wyloguj się</Button>
               </MenuItem>
             </MenuList>
           </Menu>) : (<Button
-            onClick={() => router.push("/login")}
+            onClick={() => router.replace("/login")}
             color={"gray.300"}
             bg={"red.400"}
             size={{ base: "sm", md: "md" }}

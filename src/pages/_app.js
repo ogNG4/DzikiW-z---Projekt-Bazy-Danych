@@ -3,7 +3,7 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import { Layout } from "@/components/Layout/Layout";
-import { AdminProvider } from "@/context/AuthContext";
+import { AdminProvider } from "@/context/AdminContext";
 export default function App({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
 
@@ -14,9 +14,9 @@ export default function App({ Component, pageProps }) {
     >
       <ChakraProvider>
         <AdminProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </AdminProvider>
       </ChakraProvider>
     </SessionContextProvider>

@@ -10,7 +10,6 @@ export const AdminProvider = ({ children }) => {
 
   useEffect(() => {
     if (session?.user) {
- 
       supabase
         .from("profiles")
         .select("isAdmin")

@@ -14,9 +14,9 @@ import {
 
 export default function NewCarForm({ onSubmit }) {
   return (
-    <Box minH={"75vh"} mt={"10rem"}>
+    <Box minH={"75vh"} mt={"5rem"}>
       <Text
-        margin={"2rem auto"}
+        margin={"auto"}
         width={"max-content"}
         fontSize={{ base: "2rem", md: "3rem" }}
         fontWeight={"500"}
@@ -24,8 +24,9 @@ export default function NewCarForm({ onSubmit }) {
         Dodaj pojazd
       </Text>
       <Flex
-        w={{ base: "90%", md: "70%", lg: "50%", xl: "40%", "2xl": "30%" }}
-        margin={"5rem auto"}
+        w={'auto'}
+        maxW={'600px'}
+        margin={"2rem auto"}
         bg={"gray.700"}
         p={"1.5rem"}
         borderRadius={"1rem"}
@@ -36,30 +37,32 @@ export default function NewCarForm({ onSubmit }) {
           onSubmit={onSubmit}
           textAlign={"center"}
         >
+          {/* <FormLabel>Zdjęcie</FormLabel>
+          <Input type="file" name="photo" /> */}
           <FormLabel>Marka</FormLabel>
-          <Select type="text" name="brand" id="brand" required>
+          <Select type="text" name="brand" id="brand" placeholder=' ' required>
             <option value="Bmw">BMW</option>
             <option value="Audi">Audi</option>
             <option value="Mercedes">Mercedes</option>
           </Select>
           <FormLabel>Model</FormLabel>
           <Input type="text" name="model" id="model" required />
-          <FormLabel>Pojemność (cm3)</FormLabel>
+          <FormLabel>Pojemność </FormLabel>
           <NumberInput name="capacity" id="capacity" required>
-            <NumberInputField />
+            <NumberInputField placeholder="cm3" />
           </NumberInput>
-          <FormLabel>Moc (KM)</FormLabel>
+          <FormLabel>Moc </FormLabel>
           <NumberInput name="power" id="power" required>
-            <NumberInputField />
+            <NumberInputField placeholder='KM' />
           </NumberInput>
           <FormLabel>Typ</FormLabel>
-          <Select type="text" name="type" id="type" required>
+          <Select type="text" name="type" id="type" placeholder='' required>
             <option value="Sportowy">Sportowy</option>
             <option value="Hatchback">Hatchback</option>
             <option value="Combi">Kombi</option>
           </Select>
           <FormLabel>Rocznik</FormLabel>
-          <Select type="number" name="year" id="year" required>
+          <Select type="number" name="year" id="year" placeholder='' required>
             <option value="2022">2022</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
@@ -79,12 +82,12 @@ export default function NewCarForm({ onSubmit }) {
             <NumberInputField />
           </NumberInput>
           <FormLabel>Skrzynia biegów</FormLabel>
-          <Select type="text" name="transmission" id="transmission" required>
+          <Select type="text" name="transmission" id="transmission"  required>
             <option value="automatic">Automatyczna</option>
             <option value="manual">Manualna</option>
           </Select>
 
-          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
+          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"} >
             Wyślij
           </Button>
         </FormControl>
