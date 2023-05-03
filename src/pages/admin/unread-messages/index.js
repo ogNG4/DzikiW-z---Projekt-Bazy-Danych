@@ -33,4 +33,8 @@ export async function getStaticProps() {
       notFound: true,
     };
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8616ef7afcb3828db243b630ac44bb8515708ea4
