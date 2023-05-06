@@ -66,7 +66,7 @@ export function AdminNavbar() {
             </h2>
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/">Lista pojazdów</Link>
+                <Link href="/admin/cars-list">Lista pojazdów</Link>
                 <Link href="/admin/newCar">Dodaj pojazd</Link>
               </Flex>
             </AccordionPanel>
@@ -118,8 +118,8 @@ export function AdminNavbar() {
             </h2>
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/">Samochód</Link>
-                <Link href="/">Flota</Link>
+                <Link href="/admin">Samochód</Link>
+                <Link href="/admin">Flota</Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>

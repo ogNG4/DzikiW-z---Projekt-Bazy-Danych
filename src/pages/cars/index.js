@@ -1,9 +1,31 @@
+import { useState, useEffect } from "react";
+
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { supabase } from "@/lib/supabase";
 
 import CarCard from "@/components/UI/CarCard";
+import SortForm from "@/components/User/CarsFilters/SortForm";
 
 export default function Cars({ cars }) {
+  useEffect(()=>{
+    console.log(cars)
+  },[])
+  const [sortOption, setSortOption] = useState("");
+
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
+
+  const sortFunctions = new Map([
+    ["power-desc", (a, b) => b.power - a.power],
+    ["power-asc", (a, b) => a.power - b.power],
+    ["year-desc", (a, b) => b.year - a.year],
+    ["year-asc", (a, b) => a.year - b.year],
+    ["price-desc", (a, b) => b.price - a.price],
+    ["price-asc", (a, b) => a.price - b.price],
+  ]);
+  
+  const sortedCars = [...cars].sort(sortFunctions.get(sortOption) || (() => 0));
   return (
     <Flex
       minH={"100vh"}
@@ -23,6 +45,7 @@ export default function Cars({ cars }) {
           Flota
         </Text>
       </Box>
+      <SortForm handleSortChange={handleSortChange} />
       <Grid
         templateColumns={{
           base: "1fr",
@@ -34,7 +57,7 @@ export default function Cars({ cars }) {
         mt={"3rem"}
         p={"1rem"}
       >
-        {cars.map((car) => (
+        {sortedCars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
       </Grid>
@@ -44,7 +67,7 @@ export default function Cars({ cars }) {
 
 export async function getStaticProps() {
   try {
-    const {data} = await supabase.from("cars").select("*");
+    const { data } = await supabase.from("cars").select("*");
 
     return {
       props: {

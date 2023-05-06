@@ -14,7 +14,7 @@ export default function AdminDashboard() {
 
   return (
     <>
-      <ContactForm />
+      <h1>Admin Panel</h1>
     </>
   );
 }

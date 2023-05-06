@@ -83,9 +83,17 @@ export default function NewCarForm({ onSubmit }) {
           </NumberInput>
           <FormLabel>Skrzynia biegów</FormLabel>
           <Select type="text" name="transmission" id="transmission"  required>
-            <option value="automatic">Automatyczna</option>
-            <option value="manual">Manualna</option>
+            <option value="automatyczna">Automatyczna</option>
+            <option value="manualna">Manualna</option>
           </Select>
+          <FormLabel>Opis</FormLabel>
+          <Textarea
+            type="text"
+            name="description"
+            id="description"
+            rows={10}
+            required
+          />
 
           <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"} >
             Wyślij
