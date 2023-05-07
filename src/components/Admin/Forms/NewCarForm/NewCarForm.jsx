@@ -44,6 +44,9 @@ export default function NewCarForm({ onSubmit }) {
             <option value="Bmw">BMW</option>
             <option value="Audi">Audi</option>
             <option value="Mercedes">Mercedes</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Ferrari">Ferrari</option>
+            <option value="Lamborghini">Lamborghini</option>
           </Select>
           <FormLabel>Model</FormLabel>
           <Input type="text" name="model" id="model" required />
@@ -76,6 +79,7 @@ export default function NewCarForm({ onSubmit }) {
             <option value="Czerwony">Czerwony</option>
             <option value="Szary">Szary</option>
             <option value="Zielony">Zielony</option>
+            <option value="Żółty">Żółty</option>
           </Select>
           <FormLabel>Cena za dobę</FormLabel>
           <NumberInput name="price" id="price" required>
