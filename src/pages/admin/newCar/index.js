@@ -2,10 +2,12 @@ import NewCarForm from "../../../components/Admin/Forms/NewCarForm/NewCarForm";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAdmin } from "@/context/AdminContext";
+import { useToast } from "@chakra-ui/react";
 
 export default function NewCar() {
   const isAdmin = useAdmin();
   const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     !isAdmin ? router.replace("/") : null;
@@ -28,7 +30,13 @@ export default function NewCar() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        alert("dodano nowy samochód");
+        toast({
+          title: 'Pomyślnie dodano samochód',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right'
+        })
       } else {
         console.error(response);
       }
