@@ -1,4 +1,5 @@
-import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Text, Button } from "@chakra-ui/react";
+import Link from "next/link";
 export default function CarCard({ car }) {
   return (
     <Box bg={"whiteAlpha.100"} h={"auto"} w={"100%"}>
@@ -56,6 +57,11 @@ export default function CarCard({ car }) {
             <Text>Moc:</Text>
             <Text>{car.power} KM</Text>
           </HStack>
+          <Link  href={`/cars/${car.id}`}>
+          <Button bg={'tomato'}>
+              Szczegóły
+          </Button>
+          </Link>
         </Flex>
       </Flex>
     </Box>
