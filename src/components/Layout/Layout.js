@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AdminLayout } from "./AdminLayout/AdminLayout";
+import AdminLayout from "./AdminLayout/AdminLayout";
 import { UserLayout } from "./UserLayout/UserLayout";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useAdmin } from "@/context/AdminContext";

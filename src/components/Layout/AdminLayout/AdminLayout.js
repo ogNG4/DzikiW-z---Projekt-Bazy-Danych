@@ -1,6 +1,6 @@
 import { AdminNavbar } from "./AdminNavbar";
 
-export function AdminLayout({ children }) {
+export  default function AdminLayout({ children }) {
   return (
     <>
       <AdminNavbar />
