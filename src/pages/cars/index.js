@@ -5,11 +5,10 @@ import { supabase } from "@/lib/supabase";
 
 import CarCard from "@/components/UI/CarCard";
 import SortForm from "@/components/User/CarsFilters/SortForm";
+import { useRouter } from "next/router";
 
 export default function Cars({ cars }) {
-  useEffect(()=>{
-    console.log(cars)
-  },[])
+
   const [sortOption, setSortOption] = useState("");
 
   const handleSortChange = (event) => {
@@ -26,6 +25,10 @@ export default function Cars({ cars }) {
   ]);
   
   const sortedCars = [...cars].sort(sortFunctions.get(sortOption) || (() => 0));
+
+
+
+ 
   return (
     <Flex
       minH={"100vh"}

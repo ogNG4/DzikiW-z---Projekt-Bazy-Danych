@@ -24,6 +24,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Link } from "@chakra-ui/next-js";
 
 import { Logo } from "../Logo/Logo";
+import { useUser } from "@/context/UserContext";
 
 
 export function UserNavbar() {
@@ -32,6 +33,7 @@ export function UserNavbar() {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const session = useSession();
+  const {profile} = useUser();
 
   const logoutHandler = () => {
     supabase.auth.signOut();
@@ -76,7 +78,7 @@ export function UserNavbar() {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem>Link 1</MenuItem>
+              <MenuItem>{profile?.first_name}</MenuItem>
               <MenuDivider />
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />
