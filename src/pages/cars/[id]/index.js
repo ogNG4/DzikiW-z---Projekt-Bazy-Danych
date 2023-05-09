@@ -50,6 +50,7 @@ export default function Car({ car }) {
             <Button bg={'tomato'}>
                 Powrót
             </Button>
+            
         </Link>
       </Flex>
     </Box>

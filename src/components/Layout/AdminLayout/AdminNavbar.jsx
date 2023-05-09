@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
-import {  useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Link } from "@chakra-ui/next-js";
 
 import { Logo } from "../Logo/Logo";
@@ -38,12 +38,10 @@ export function AdminNavbar() {
       maxW={"350px"}
       h={"100vh"}
       borderRight={"1px solid gray"}
-      position={'sticky'}
-      top={'0'}
-      left={'0'}
-      zIndex={'10'}
-      
-      
+      position={"sticky"}
+      top={"0"}
+      left={"0"}
+      zIndex={"10"}
     >
       <Flex flexDirection={"column"} justifyContent={"space-between"}>
         <IconButton
@@ -54,16 +52,15 @@ export function AdminNavbar() {
           onClick={isOpen ? onClose : onOpen}
         />
 
-        <Accordion allowToggle mt={"3rem"} marginBottom={'2rem'}>
+        <Accordion allowToggle mt={"3rem"} marginBottom={"2rem"}>
           <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  Flota
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Flota
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
                 <Link href="/admin/cars-list">Lista pojazdów</Link>
@@ -73,49 +70,48 @@ export function AdminNavbar() {
           </AccordionItem>
 
           <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  Rezerwacje
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Rezerwacje
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/">Aktualne rezerwacje</Link>
-                <Link href="/">Zakończone rezerwacje</Link>
-                <Link href="/">Historia rezerwacji</Link>
+                <Link href="/admin">Aktualne rezerwacje</Link>
+                <Link href="/admin">Zakończone rezerwacje</Link>
+                <Link href="/admin">Historia rezerwacji</Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  Wiadomości
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Wiadomości
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/admin/unread-messages">Wiadomości nieodczytane</Link>
+                <Link href="/admin/unread-messages">
+                  Wiadomości nieodczytane
+                </Link>
                 <Link href="/">Wiadomości odczytane</Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  Finanse
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Finanse
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
                 <Link href="/admin">Samochód</Link>
@@ -124,7 +120,11 @@ export function AdminNavbar() {
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
-        <Button bg={'red.400'} onClick={logoutHandler}>Wyloguj się</Button>
+        <Box>
+          <Button bg={"red.400"} onClick={logoutHandler}>
+            Wyloguj się
+          </Button>
+        </Box>
       </Flex>
     </Box>
   );

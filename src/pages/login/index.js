@@ -13,6 +13,7 @@ const Home = () => {
   const supabase = useSupabaseClient();
   const router = useRouter();
   const isAdmin = useAdmin();
+  
 
   useEffect(() => {
     if (session) {

@@ -69,6 +69,7 @@ export default function AdminCarCard({car}){
                 </Text>
             </Flex>
             <Flex direction={'column'} gap={'10px'}>
+                
                 <Button >Edytuj</Button>
                 <Button  onClick={handleDelete} >Usuń</Button>
             </Flex>

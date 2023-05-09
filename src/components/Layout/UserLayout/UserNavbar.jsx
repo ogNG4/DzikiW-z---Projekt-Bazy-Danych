@@ -61,7 +61,12 @@ export function UserNavbar() {
           </HStack>
         </HStack>
         <Flex alignItems={"center"}>
-      {  session ?    (<Menu>
+      {  session ?    (
+
+        <>
+        <Text fontSize={'lg'} mr={'10px'}>Witaj {profile?.first_name} !</Text>
+        
+      <Menu>
             <MenuButton
               as={Button}
               rounded={"full"}
@@ -78,7 +83,7 @@ export function UserNavbar() {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem>{profile?.first_name}</MenuItem>
+              <MenuItem >Link 1</MenuItem>
               <MenuDivider />
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />
@@ -86,7 +91,7 @@ export function UserNavbar() {
               <Button onClick={logoutHandler }>Wyloguj się</Button>
               </MenuItem>
             </MenuList>
-          </Menu>) : (<Button
+          </Menu> </>) : (<Button
             onClick={() => router.replace("/login")}
             color={"gray.300"}
             bg={"red.400"}
