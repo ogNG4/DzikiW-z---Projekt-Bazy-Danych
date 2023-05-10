@@ -16,7 +16,7 @@ export default function Contact() {
     }
 
     try {
-      const response = await fetch("../api/contact", {
+      const response = await fetch("../api/user/contact", {
         method: "POST",
         headers: {
           Accept: "application/json",

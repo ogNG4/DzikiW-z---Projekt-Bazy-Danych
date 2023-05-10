@@ -21,7 +21,7 @@ export default function NewCar() {
       formData[key] = value;
     }
     try {
-      const response = await fetch("../api/newCar", {
+      const response = await fetch("../api/admin/newCar", {
         method: "POST",
         headers: {
           Accept: "application/json",

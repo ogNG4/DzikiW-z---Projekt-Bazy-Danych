@@ -32,7 +32,7 @@ export default function CarsList({ cars }) {
 
 export async function getServerSideProps() {
   try {
-    const { data } = await supabase.from("cars").select("*");
+    const { data } = await supabase.from("cars").select("*").order('created_at',{ascending: false});
 
     return {
       props: {
