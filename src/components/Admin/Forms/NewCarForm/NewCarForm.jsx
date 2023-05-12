@@ -12,7 +12,7 @@ import {
   NumberInputField,
 } from "@chakra-ui/react";
 
-export default function NewCarForm({ onSubmit }) {
+export default function NewCarForm({ onSubmit}) {
   return (
     <Box minH={"75vh"} mt={"5rem"}>
       <Text
@@ -48,6 +48,7 @@ export default function NewCarForm({ onSubmit }) {
             <option value="Ferrari">Ferrari</option>
             <option value="Lamborghini">Lamborghini</option>
             <option value="Nissan">Nissan</option>
+            <option value="Honda">Honda</option>
           </Select>
           <FormLabel>Model</FormLabel>
           <Input type="text" name="model" id="model" required />
@@ -100,7 +101,7 @@ export default function NewCarForm({ onSubmit }) {
             required
           />
 
-          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"} >
+          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}  >
             Wyślij
           </Button>
         </FormControl>

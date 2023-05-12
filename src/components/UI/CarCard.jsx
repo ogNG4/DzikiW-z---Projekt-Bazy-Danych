@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function CarCard({ car }) {
   return (
-    <Card h={"35vh"} w={"auto"} overflow={'hidden'}>
+    <Card h={'auto'} maxH={'35vh'} w={"auto"} overflow={'hidden'}>
       <Flex direction={"column"} h={"100%"}>
         <Box h={"60%"} overflow={"hidden"} position={"relative"}>
           <Image src={car.img} objectFit={"cover"} boxSize={"100%"} />

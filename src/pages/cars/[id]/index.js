@@ -1,4 +1,24 @@
-import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  FormControl,
+  HStack,
+  Heading,
+  Image,
+  Input,
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  VStack,
+  useDisclosure,
+  Label,
+  ModalBody,
+} from "@chakra-ui/react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { useState } from "react";
@@ -11,44 +31,34 @@ export default function Car({ car }) {
   const [endDate, setEndDate] = useState("");
   const { profile } = useUser();
   const router = useRouter();
-  const session = useSession()
+  const session = useSession();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleRent = async () => {
-    if (!startDate || !endDate) {
-      // Add validation for the input fields if needed
-      return;
-    }
-
-    const rentalData = {
-      carId: car.id,
-      userId: profile?.id,
-      startDate,
-      endDate,
-    };
-
-    try {
-      const response = await supabase.from("rents").insert(rentalData);
-      if (response.error) {
-        console.log(response.error);
-      } else {
-        await supabase.from("cars").update({ isRent: true }).eq("id", car.id);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
 
   return (
     <Box w={"100%"} minH={"100vh"} mt={"7rem"} p={"2rem"}>
       <Flex direction={"column"} gap={"15px"} fontSize={"2rem"}>
-        <HStack>
-          <Text>Marka:</Text>
-          <Text>{car.brand}</Text>
-        </HStack>
-        <HStack>
-          <Text>Model:</Text>
-          <Text>{car.model}</Text>
-        </HStack>
+        <Heading margin={"1rem auto"}>
+          <HStack
+            textTransform={"uppercase"}
+            fontWeight={"500"}
+            letterSpacing={"5px"}
+            fontSize={"5xl"}
+          >
+            <Text>{car.brand}</Text>
+            <Text>{car.model}</Text>
+          </HStack>
+          <Divider />
+        </Heading>
+        <Box
+          w={{ base: "90%", lg: "20%" }}
+          margin={"0 auto"}
+          h={"auto"}
+          overflow={"hidden"}
+        >
+          <Image src={car.img} objectFit={"cover"} boxSize={"100%"} />
+        </Box>
         <HStack>
           <Text>Moc:</Text>
           <Text>{car.power} KM</Text>
@@ -81,27 +91,33 @@ export default function Car({ car }) {
           <Text>Cena za dobę:</Text>
           <Text>{car.price} ZŁ</Text>
         </HStack>
+       
         <HStack>
-          <Text>Data rozpoczęcia wypożyczenia:</Text>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </HStack>
-        <HStack>
-          <Text>Data zakończenia wypożyczenia:</Text>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        </HStack>
-        <HStack>
-          <Button bg="tomato" onClick={!session? (()=>{router.push('/login')}): handleRent}>
+          <Button
+            bg="tomato"
+            onClick={()=>{session? router.push(`/cars/${car.id}/new-rent`) : router.push("/login")}}
+          >
             Wynajmij
           </Button>
         </HStack>
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Wynajem</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <FormControl>
+                <Label>Data rozpoczęcia wynajmu</Label>
+                <Input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </FormControl>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
         <Link href={"/cars"}>
           <Button bg={"tomato"}>Powrót</Button>
         </Link>

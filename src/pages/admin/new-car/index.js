@@ -1,6 +1,6 @@
 import NewCarForm from "../../../components/Admin/Forms/NewCarForm/NewCarForm";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAdmin } from "@/context/AdminContext";
 import { useToast } from "@chakra-ui/react";
 
@@ -37,6 +37,10 @@ export default function NewCar() {
           isClosable: true,
           position: 'top-right'
         })
+
+        
+
+        
       } else {
         console.error(response);
       }
@@ -46,7 +50,7 @@ export default function NewCar() {
   };
   return (
     <>
-      <NewCarForm onSubmit={newCarSubmitHandler} />
+      <NewCarForm onSubmit={newCarSubmitHandler}  />
     </>
   );
 }
