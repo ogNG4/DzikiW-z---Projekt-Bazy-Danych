@@ -1,62 +1,46 @@
-import { Box, Flex, HStack, Image, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Text, Button, Card, VStack } from "@chakra-ui/react";
 import Link from "next/link";
+
 export default function CarCard({ car }) {
   return (
-    <Box bg={"whiteAlpha.100"} h={"auto"} w={"100%"}>
-      <Flex flexDirection={"column"}>
-        <Box w={"100%"} h={"45%"} position={"relative"}>
-          <Image src="/bmw.jpg" />
+    <Card h={"35vh"} w={"auto"} overflow={'hidden'}>
+      <Flex direction={"column"} h={"100%"}>
+        <Box h={"60%"} overflow={"hidden"} position={"relative"}>
+          <Image src={car.img} objectFit={"cover"} boxSize={"100%"} />
           <Text
             position={"absolute"}
-            top={".8rem"}
-            right={".5rem"}
-            bg={"blackAlpha.900"}
-            fontSize={"1.2rem"}
-            px={".5rem"}
+            top={1}
+            right={1}
             textTransform={"uppercase"}
             letterSpacing={"2px"}
+            borderRadius={"2px"}
+            p={"0 15px"}
             fontWeight={"500"}
-            color={"white"}
+            bg={"black"}
           >
             {car.type}
           </Text>
-
           <Flex
-            position={"absolute"}
-            bottom={".8rem"}
-            left={".5rem"}
             direction={"column"}
+            position={"absolute"}
+            bottom={1}
+            left={2}
+            fontWeight={"500"}
+            textTransform={"uppercase"}
+            letterSpacing={"2px"}
+            
           >
-            <Text
-              fontSize={"2.2rem"}
-              px={".5rem"}
-              textTransform={"uppercase"}
-              letterSpacing={"2px"}
-              fontWeight={"500"}
-            >
-              {car.brand}
-            </Text>
-            <Text
-              fontSize={"1.2rem"}
-              px={".5rem"}
-              textTransform={"uppercase"}
-              letterSpacing={"2px"}
-              fontWeight={"500"}
-            >
-              {car.model}
-            </Text>
+            <Text fontSize={'1.3rem'}>{car.brand}</Text>
+            <Text>{car.model}</Text>
           </Flex>
         </Box>
-
-        <Flex direction={"column"} fontSize={"1.2rem"} fontWeight={"500"} p={'.5rem'}>
-          <HStack>
-            <Text>Cena za dobę:</Text>
-            <Text>{car.price} zł</Text>
-          </HStack>
-          <HStack>
-            <Text>Moc:</Text>
-            <Text>{car.power} KM</Text>
-          </HStack>
+        <Flex p={'10px'} fontWeight={'500'} alignItems={'center'} gap={'15px'}>
+          <Flex direction={'column'} textAlign={'left'} >
+            <Text>Moc: {car.power} KM</Text>
+            <Text>Pojemność: {car.capacity} cm3</Text>
+            <Text>Cena za dobę: {car.price} PLN</Text>
+            <Text>Dostępny od: 21.05.2023</Text>
+          </Flex>
           <Link  href={`/cars/${car.id}`}>
           <Button bg={'tomato'}>
               Szczegóły
@@ -64,6 +48,6 @@ export default function CarCard({ car }) {
           </Link>
         </Flex>
       </Flex>
-    </Box>
+    </Card>
   );
 }

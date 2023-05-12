@@ -37,8 +37,8 @@ export default function NewCarForm({ onSubmit }) {
           onSubmit={onSubmit}
           textAlign={"center"}
         >
-          {/* <FormLabel>Zdjęcie</FormLabel>
-          <Input type="file" name="photo" /> */}
+          <FormLabel>Zdjęcie</FormLabel>
+          <Input type="text" name="img" id="img" />
           <FormLabel>Marka</FormLabel>
           <Select type="text" name="brand" id="brand" placeholder=' ' required>
             <option value="Bmw">BMW</option>
@@ -47,6 +47,7 @@ export default function NewCarForm({ onSubmit }) {
             <option value="Volkswagen">Volkswagen</option>
             <option value="Ferrari">Ferrari</option>
             <option value="Lamborghini">Lamborghini</option>
+            <option value="Nissan">Nissan</option>
           </Select>
           <FormLabel>Model</FormLabel>
           <Input type="text" name="model" id="model" required />

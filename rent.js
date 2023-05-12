@@ -4,14 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/router";
-import { useSession } from "@supabase/auth-helpers-react";
 
 export default function Car({ car }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const { profile } = useUser();
   const router = useRouter();
-  const session = useSession()
+  
 
   const handleRent = async () => {
     if (!startDate || !endDate) {
@@ -30,8 +29,12 @@ export default function Car({ car }) {
       const response = await supabase.from("rents").insert(rentalData);
       if (response.error) {
         console.log(response.error);
-      } else {
-        await supabase.from("cars").update({ isRent: true }).eq("id", car.id);
+      }
+       else {
+        await supabase
+          .from("cars")
+          .update({ isRent: true })
+          .eq("id", car.id);
       }
     } catch (error) {
       console.log(error);
@@ -98,12 +101,16 @@ export default function Car({ car }) {
           />
         </HStack>
         <HStack>
-          <Button bg="tomato" onClick={!session? (()=>{router.push('/login')}): handleRent}>
+          <Button bg="tomato" onClick={handleRent}>
             Wynajmij
           </Button>
         </HStack>
         <Link href={"/cars"}>
-          <Button bg={"tomato"}>Powrót</Button>
+          <Button bg={"tomato"}>
+            Powrót
+ót
+            </Button>
+            
         </Link>
       </Flex>
     </Box>
@@ -128,6 +135,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   try {
     const { id } = params;
+
     const { data } = await supabase
       .from("cars")
       .select("*")
