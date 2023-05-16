@@ -70,7 +70,7 @@ export default function AdminCarCard({car}){
             </Flex>
             <Flex direction={'column'} gap={'10px'}>
                 
-                <Button >Edytuj</Button>
+                <Button onClick={()=>{router.push(`/admin/cars-list/${car.id}`)}}>Edytuj</Button>
                 <Button  onClick={handleDelete} >Usuń</Button>
             </Flex>
             </Flex>
