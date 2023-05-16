@@ -40,16 +40,7 @@ export default function NewCarForm({ onSubmit}) {
           <FormLabel>Zdjęcie</FormLabel>
           <Input type="text" name="img" id="img" />
           <FormLabel>Marka</FormLabel>
-          <Select type="text" name="brand" id="brand" placeholder=' ' required>
-            <option value="Bmw">BMW</option>
-            <option value="Audi">Audi</option>
-            <option value="Mercedes">Mercedes</option>
-            <option value="Volkswagen">Volkswagen</option>
-            <option value="Ferrari">Ferrari</option>
-            <option value="Lamborghini">Lamborghini</option>
-            <option value="Nissan">Nissan</option>
-            <option value="Honda">Honda</option>
-          </Select>
+          <Input type="text" name="brand" id="brand" placeholder=' ' required/>
           <FormLabel>Model</FormLabel>
           <Input type="text" name="model" id="model" required />
           <FormLabel>Pojemność </FormLabel>
@@ -65,24 +56,13 @@ export default function NewCarForm({ onSubmit}) {
             <option value="Sportowy">Sportowy</option>
             <option value="Hatchback">Hatchback</option>
             <option value="Combi">Kombi</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Coupe">Coupe</option>
           </Select>
           <FormLabel>Rocznik</FormLabel>
-          <Select type="number" name="year" id="year" placeholder='' required>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-          </Select>
+          <Input type="number" name="year" id="year" placeholder='' required/>
           <FormLabel>Kolor</FormLabel>
-          <Select type="text" name="color" id="color" required>
-            <option value="Czarny">Czarny</option>
-            <option value="Biały">Biały</option>
-            <option value="Czerwony">Czerwony</option>
-            <option value="Szary">Szary</option>
-            <option value="Zielony">Zielony</option>
-            <option value="Żółty">Żółty</option>
-          </Select>
+          <Input type="text" name="color" id="color" required/>
           <FormLabel>Cena za dobę</FormLabel>
           <NumberInput name="price" id="price" required>
             <NumberInputField />
