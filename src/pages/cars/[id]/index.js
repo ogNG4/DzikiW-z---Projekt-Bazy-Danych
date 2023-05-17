@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
@@ -34,7 +34,7 @@ export default function Car({ car }) {
   const session = useSession();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
- 
+
 
   return (
     <Box w={"100%"} minH={"100vh"} mt={"7rem"} p={"2rem"}>
@@ -101,23 +101,6 @@ export default function Car({ car }) {
           </Button>
         </HStack>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Wynajem</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <FormControl>
-                <Label>Data rozpoczęcia wynajmu</Label>
-                <Input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </FormControl>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
         <Link href={"/cars"}>
           <Button bg={"tomato"}>Powrót</Button>
         </Link>
@@ -126,24 +109,11 @@ export default function Car({ car }) {
   );
 }
 
-export async function getStaticPaths() {
+
+
+export async function getServerSideProps({ params }) {
   try {
-    const { data } = await supabase.from("cars").select("id");
-
-    const paths = data.map((car) => ({
-      params: { id: car.id.toString() },
-    }));
-
-    return { paths, fallback: false };
-  } catch (error) {
-    console.log(error);
-    return { paths: [], fallback: false };
-  }
-}
-
-export async function getStaticProps({ params }) {
-  try {
-    const { id } = params;
+    const { id} = params;
     const { data } = await supabase
       .from("cars")
       .select("*")
@@ -154,7 +124,6 @@ export async function getStaticProps({ params }) {
       props: {
         car: data,
       },
-      revalidate: 60,
     };
   } catch (error) {
     console.log(error);

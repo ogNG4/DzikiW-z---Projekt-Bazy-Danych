@@ -7,17 +7,6 @@ import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function CarsList({ cars }) {
-  // const router = useRouter();
-  // const handleDelete = async () => {
-  //   const response = await fetch(`/api/admin/cars/deleteCar/${cars.id}`, { method: "DELETE" });
-  //   if (response.ok) {
-   
-  //     router.reload();
-        
-  //   } else {
-  //     console.error(response.statusText);
-  //   }
-  // };
 
   return (
     <>
@@ -33,7 +22,7 @@ export default function CarsList({ cars }) {
           <AdminCarCard
             key={car.id}
             car={car}
-            // handleDelete={handleDelete}
+          
            
           />
         ))}
