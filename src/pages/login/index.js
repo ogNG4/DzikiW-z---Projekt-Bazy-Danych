@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { ThemeSupa,  } from "@supabase/auth-ui-shared";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -13,7 +13,7 @@ const Home = () => {
   const supabase = useSupabaseClient();
   const router = useRouter();
   const isAdmin = useAdmin();
-  
+
 
   useEffect(() => {
     if (session) {
@@ -40,6 +40,32 @@ const Home = () => {
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
             theme="dark"
+            providers={[]}
+            localization={{
+              variables: {
+                sign_in: {
+                  email_label: 'Email',
+                  password_label: 'Hasło',
+                  button_label: 'Zaloguj się',
+                  email_input_placeholder: 'Wprowadź swój adres e-mail',
+                  password_input_placeholder: 'Wprowadź swoje hasło',
+                  link_text: 'Masz już konto? Zaloguj się'
+                },
+                sign_up: {
+                  email_label: 'Email',
+                  password_label: 'Hasło',
+                  button_label: 'Zarejestruj się',
+                  email_input_placeholder: 'Wprowadź swój adres e-mail',
+                  password_input_placeholder: 'Wprowadź swoje hasło',
+                  link_text: 'Nie masz konta? Zarejestruj się'
+                },
+                forgotten_password:{
+                  link_text: "",
+                }
+              },
+              
+            }}
+            
           />
         ) : (
           <Stack>
