@@ -64,7 +64,7 @@ export function UserNavbar() {
       {  session ?    (
 
         <>
-        <Text fontSize={'lg'} mr={'10px'}>Witaj {profile?.first_name} !</Text>
+        <Text fontSize={'lg'} mr={'10px'}>Witaj {profile?.firstName} !</Text>
         
       <Menu>
             <MenuButton

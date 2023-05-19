@@ -1,34 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
 import { useUser } from "@/context/UserContext";
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import NewRentForm from "@/components/User/NewRentForm/NewRentForm";
+import { supabase } from "@/lib/supabase";
 
 export default function NewRent() {
-    const [startDate, setStartDate] = useState("");
-    const minEndDate = startDate ? new Date(startDate) : null;
-    if (minEndDate) minEndDate.setDate(minEndDate.getDate() + 1);
-    const [endDate, setEndDate] = useState("");
   const { profile } = useUser();
   const router = useRouter();
   const session = useSession();
 
-  const handleRent = async () => {
-    if (!startDate || !endDate) {
-      // Dodaj walidację pól wejściowych, jeśli jest to wymagane
-      return;
+ 
+  const handleRent = async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const formData = {};
+    for (let [key, value] of form) {
+      formData[key] = value;
     }
-
-    const carId = router.query.id; // // Pobranie identyfikatora samochodu z routera
-
+  
+    const carId = router.query.id;
+  
     const rentalData = {
+      ...formData,
       carId,
       userId: profile?.id,
-      startDate,
-      endDate,
     };
 
+    const userData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phoneNumber: formData.phoneNumber,
+      street: formData.street,
+      city: formData.city,
+    };
+
+   
     try {
+      
+      await fetch(`/api/user/update-user/${profile?.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+  
+     
       const response = await fetch("/api/user/new-rent", {
         method: "POST",
         headers: {
@@ -36,10 +55,10 @@ export default function NewRent() {
         },
         body: JSON.stringify(rentalData),
       });
-
+  
       if (response.ok) {
-        // Wypożyczenie utworzone pomyślnie
-        router.push("/cars"); // Przekierowanie na stronę sukcesu
+        router.replace("/cars");
+        
       } else {
         console.log("Failed to create rental");
       }
@@ -48,30 +67,13 @@ export default function NewRent() {
     }
   };
 
+
+
+  
+
   return (
     <>
-      <HStack m={"20rem auto"}>
-        <Text>Data rozpoczęcia wypożyczenia:</Text>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-      </HStack>
-      <HStack>
-        <Text>Data zakończenia wypożyczenia:</Text>
-        <input
-  type="date"
-  value={endDate}
-  min={minEndDate ? minEndDate.toISOString().split("T")[0] : ""}
-  onChange={(e) => setEndDate(e.target.value)}
-/>
-      </HStack>
-      <HStack>
-        <Button bg="tomato" onClick={handleRent}>
-          Wynajmij
-        </Button>
-      </HStack>
+      <NewRentForm onSubmit={handleRent} profile={profile} />
     </>
   );
 }

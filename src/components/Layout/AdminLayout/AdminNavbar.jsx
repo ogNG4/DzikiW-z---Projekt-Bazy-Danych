@@ -79,7 +79,7 @@ export function AdminNavbar() {
 
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/admin">Aktualne rezerwacje</Link>
+                <Link href="/admin/rents/current-rents">Aktualne rezerwacje</Link>
                 <Link href="/admin">Zakończone rezerwacje</Link>
                 <Link href="/admin">Historia rezerwacji</Link>
               </Flex>

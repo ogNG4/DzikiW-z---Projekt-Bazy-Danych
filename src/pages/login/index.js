@@ -20,7 +20,7 @@ const Home = () => {
       if (isAdmin) {
         router.replace("/admin");
       } else {
-        router.replace("/");
+        router.push('/')
       }
     }
   }, [session, router]);
@@ -50,6 +50,7 @@ const Home = () => {
                   email_input_placeholder: 'Wprowadź swój adres e-mail',
                   password_input_placeholder: 'Wprowadź swoje hasło',
                   link_text: 'Masz już konto? Zaloguj się'
+                  
                 },
                 sign_up: {
                   email_label: 'Email',
@@ -65,7 +66,9 @@ const Home = () => {
               },
               
             }}
+
             
+
           />
         ) : (
           <Stack>
