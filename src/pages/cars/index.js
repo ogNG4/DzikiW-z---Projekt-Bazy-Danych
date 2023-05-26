@@ -9,22 +9,22 @@ import { useRouter } from "next/router";
 
 export default function Cars({ cars }) {
 
-  // const [sortOption, setSortOption] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
-  // const handleSortChange = (event) => {
-  //   setSortOption(event.target.value);
-  // };
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
 
-  // const sortFunctions = new Map([
-  //   ["power-desc", (a, b) => b.power - a.power],
-  //   ["power-asc", (a, b) => a.power - b.power],
-  //   ["year-desc", (a, b) => b.year - a.year],
-  //   ["year-asc", (a, b) => a.year - b.year],
-  //   ["price-desc", (a, b) => b.price - a.price],
-  //   ["price-asc", (a, b) => a.price - b.price],
-  // ]);
+  const sortFunctions = new Map([
+    ["power-desc", (a, b) => b.power - a.power],
+    ["power-asc", (a, b) => a.power - b.power],
+    ["year-desc", (a, b) => b.year - a.year],
+    ["year-asc", (a, b) => a.year - b.year],
+    ["price-desc", (a, b) => b.price - a.price],
+    ["price-asc", (a, b) => a.price - b.price],
+  ]);
   
-  // const sortedCars = [...cars].sort(sortFunctions.get(sortOption) || (() => 0));
+  const sortedCars = [...cars].sort(sortFunctions.get(sortOption) || (() => 0));
 
 
 
@@ -48,7 +48,7 @@ export default function Cars({ cars }) {
           Flota
         </Text>
       </Box>
-      {/* <SortForm handleSortChange={handleSortChange} /> */}
+      <SortForm handleSortChange={handleSortChange} />
       <Grid
         templateColumns={{
           base: "1fr",
@@ -60,7 +60,7 @@ export default function Cars({ cars }) {
         mt={"3rem"}
         p={"1rem"}
       >
-        {cars.map((car) => (
+        {sortedCars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
       </Grid>

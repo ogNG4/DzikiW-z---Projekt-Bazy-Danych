@@ -83,7 +83,7 @@ export function UserNavbar() {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem >Link 1</MenuItem>
+              <MenuItem ><Link href='/my-rents'>Moje rezerwacje</Link></MenuItem>
               <MenuDivider />
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />

@@ -1,26 +1,17 @@
-import {
-  FormControl,
-  Flex,
-  FormLabel,
-  Input,
-  Textarea,
-  Button,
-  Box,
-  Text,
-  Select,
-  NumberInput,
-  NumberInputField,
-} from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { FormControl, Flex, FormLabel, Input, Text, Button, Box } from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function NewRentForm({ onSubmit, profile }) {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  
-  
- 
+  const onSubmitHandler = (data) => {
+    onSubmit(data);
+  };
+
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
   };
@@ -28,8 +19,8 @@ export default function NewRentForm({ onSubmit, profile }) {
   const handleEndDateChange = (event) => {
     setEndDate(event.target.value);
   };
+
   return (
-   
     <Box minH={"75vh"} mt={"5rem"}>
       <Text
         margin={"auto"}
@@ -47,53 +38,93 @@ export default function NewRentForm({ onSubmit, profile }) {
         p={"1.5rem"}
         borderRadius={"1rem"}
       >
-         {profile &&
-        <FormControl
-          as="form"
-          spacing={"1rem"}
-          onSubmit={onSubmit}
-          textAlign={"center"}
-        >
-          <FormLabel>Od</FormLabel>
-          <Input
-            type="date"
-            name="startDate"
-            id="startDate"
-            onChange={handleStartDateChange}
-            max={endDate}
-            required
-          />
-          <FormLabel>Do</FormLabel>
-          <Input
-            type="date"
-            name="endDate"
-            id="endDate"
-            onChange={handleEndDateChange}
-            min={startDate}
-            required
-          />
-          <FormLabel>Imię</FormLabel>
-         
-          <Input
-            type="text"
-            name="firstName"
-            id="firstName"
-            defaultValue={profile.firstName}
-            
-          />
-          <FormLabel>Nazwisko</FormLabel>
-          <Input type="text" name="lastName" id="lastName" required defaultValue={profile.lastName}  />
-          <FormLabel>Miejsowość</FormLabel>
-          <Input type="text" name="city" id="city" required  defaultValue={profile.city}/>
-          <FormLabel>Ulica i numer </FormLabel>
-          <Input type="text" name="street" id="street" required defaultValue={profile.street} />
-          <FormLabel>Numer telefonu</FormLabel>
-          <Input type="number" name="phoneNumber" id="phoneNumber" required  defaultValue={profile.phoneNumber}/>
-
-          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
-            Wyślij
-          </Button>
-        </FormControl>}
+        {profile && (
+          <FormControl
+            as="form"
+            spacing={"1rem"}
+            onSubmit={handleSubmit(onSubmitHandler)}
+            textAlign={"center"}
+          >
+            <FormLabel>Od</FormLabel>
+            <Input
+              type="datetime-local"
+              {...register("startDate", { required: true })}
+              value={startDate}
+              onChange={handleStartDateChange}
+              max={endDate}
+              required
+            />
+            {errors.startDate && errors.startDate.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text> 
+            )}
+            <FormLabel>Do</FormLabel>
+            <Input
+              type="datetime-local"
+              {...register("endDate", { required: true })}
+              value={endDate}
+              onChange={handleEndDateChange}
+              min={startDate}
+              required
+            />
+            {errors.endDate && errors.endDate.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            <FormLabel>Imię</FormLabel>
+            <Input
+              type="text"
+              {...register("firstName", { required: true })}
+              defaultValue={profile.firstName}
+            />
+            {errors.firstName && errors.firstName.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            <FormLabel>Nazwisko</FormLabel>
+            <Input
+              type="text"
+              {...register("lastName", { required: true })}
+              defaultValue={profile.lastName}
+            />
+            {errors.lastName && errors.lastName.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            <FormLabel>Miejsowość</FormLabel>
+            <Input
+              type="text"
+              {...register("city", { required: true })}
+              defaultValue={profile.city}
+            />
+            {errors.city && errors.city.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            <FormLabel>Ulica i numer</FormLabel>
+            <Input
+              type="text"
+              {...register("street", { required: true })}
+              defaultValue={profile.street}
+            />
+            {errors.street && errors.street.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            <FormLabel>Numer telefonu</FormLabel>
+            <Input
+              type="number"
+              {...register("phoneNumber", { required: true })}
+              defaultValue={profile.phoneNumber}
+            />
+               {errors.phoneNumber && errors.phoneNumber.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            {errors.phoneNumber && errors.phoneNumber.type === "minLength" && (
+              <Text color={"yellow.200"}>Numer jest za krótki</Text>
+            )}
+            {errors.phoneNumber && errors.phoneNumber.type === "maxLength" && (
+              <Text color={"yellow.200"}>Numer jest za długi</Text>
+            )}
+            <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
+              Wyślij
+            </Button>
+          </FormControl>
+        )}
       </Flex>
     </Box>
   );

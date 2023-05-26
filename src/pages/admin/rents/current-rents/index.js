@@ -86,7 +86,7 @@ export async function getServerSideProps() {
     const { data, error } = await supabase
       .from("rents")
       .select(`*, cars(*), profiles(*)`);
-
+      
     return {
       props: {
         rents: data,

@@ -1,20 +1,30 @@
+import { useForm } from "react-hook-form";
 import {
-    FormControl,
-    Flex,
-    FormLabel,
-    Input,
-    Textarea,
-    Button,
-    Box,
-    Text,
-  
-  } from "@chakra-ui/react";
-  
-  export default function ContactForm({ onSubmit }) {
-   
-    return (
-      <>
-        <Box minH={'75vh'} mt={'10rem'}>
+  FormControl,
+  Flex,
+  FormLabel,
+  Input,
+  Textarea,
+  Button,
+  Box,
+  Text,
+} from "@chakra-ui/react";
+import { useState } from "react";
+
+export default function ContactForm({ onSubmit }) {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const submitHandler = (data) => {
+    onSubmit(data);
+  };
+
+  return (
+    <>
+      <Box minH={"75vh"} mt={"10rem"}>
         <Text
           margin={"2rem auto"}
           width={"max-content"}
@@ -33,31 +43,72 @@ import {
           <FormControl
             as="form"
             spacing={"1rem"}
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit(submitHandler)}
             textAlign={"center"}
           >
             <FormLabel>Imię</FormLabel>
-            <Input type="text" name="firstName" id="firstName" required />
+            <Input type="text" {...register("firstName", { required: true })} />
+            {errors.firstName && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+
             <FormLabel>Nazwisko</FormLabel>
-            <Input type="text" name="lastName" id="lastName" required />
+            <Input type="text" {...register("lastName", { required: true })} />
+            {errors.lastName && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+
             <FormLabel>E-mail</FormLabel>
-            <Input type="email" name="email" id="email" required   />
+            <Input type="email" {...register("email", { required: true })} />
+            {errors.email && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+
             <FormLabel>Numer Telefonu</FormLabel>
-            <Input type="number" name="phoneNumber" id="phoneNumber" required  />
+            <Input
+              type="number"
+              {...register("phoneNumber", {
+                required: true,
+                minLength: 9,
+                maxLength: 9,
+              })}
+            />
+            {errors.phoneNumber && errors.phoneNumber.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            {errors.phoneNumber && errors.phoneNumber.type === "minLength" && (
+              <Text color={"yellow.200"}>Numer jest za krótki</Text>
+            )}
+            {errors.phoneNumber && errors.phoneNumber.type === "maxLength" && (
+              <Text color={"yellow.200"}>Numer jest za długi</Text>
+            )}
+
             <FormLabel>Wiadomość</FormLabel>
             <Textarea
               type="text"
-              name="message"
-              id="message"
+              {...register("message", { required: true, maxLength: 300 })}
               rows={10}
-              required
             />
-            <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
+            {errors.message && errors.message.type === "required" && (
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            {errors.message && errors.message.type === "maxLength" && (
+              <Text color={"yellow.200"}>
+                Wiadomość jest za długa(max 300 znaków)
+              </Text>
+            )}
+
+            <Button
+              type="submit"
+              bg={"red.400"}
+              margin={"2rem auto"}
+              px={"2rem"}
+            >
               Wyślij
             </Button>
           </FormControl>
         </Flex>
       </Box>
-      </>
-    );
-  }
+    </>
+  );
+}
