@@ -8,7 +8,7 @@ import { useAdmin } from "../../context/AdminContext";
 
 import { Skeleton, Stack } from "@chakra-ui/react";
 
-const Home = () => {
+const LoginPage = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const router = useRouter();
@@ -82,4 +82,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default LoginPage;

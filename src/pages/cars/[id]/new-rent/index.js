@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
 import { useUser } from "@/context/UserContext";
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
-import NewRentForm from "@/components/User/NewRentForm/NewRentForm";
+import NewRentForm from "@/components/User/Rents/NewRentForm/NewRentForm";
 import { supabase } from "@/lib/supabase";
 
 export default function NewRentPage() {

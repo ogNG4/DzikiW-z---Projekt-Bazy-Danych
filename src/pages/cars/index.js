@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 import CarCard from "@/components/User/Cars/CarDetailCard/CarDetailCard";
 import SortForm from "@/components/User/CarsFilters/SortForm";
 import { useRouter } from "next/router";
+import SectionHeader from "@/components/UI/SectionHeader";
 
 export default function Cars({ cars }) {
 
@@ -39,14 +40,7 @@ export default function Cars({ cars }) {
       width={"100%"}
     >
       <Box w={"max-content"}>
-        <Text
-          fontSize={{ base: "1.6rem", md: "2.7rem" }}
-          fontWeight={"400"}
-          textTransform={"uppercase"}
-          letterSpacing={"5px"}
-        >
-          Flota
-        </Text>
+       <SectionHeader title={'Nasze samochody'} />
       </Box>
       <SortForm handleSortChange={handleSortChange} />
       <Grid

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Layout } from "@/components/Layout/Layout";
 import { AdminProvider } from "@/context/AdminContext";
 import { UserProvider } from "@/context/UserContext";
+import CreateTable from "@/lib/supabase";
 export default function App({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
 
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }) {
         <AdminProvider>
           <Layout>
             <Component {...pageProps} />
+            
           </Layout>
         </AdminProvider>
         </UserProvider>

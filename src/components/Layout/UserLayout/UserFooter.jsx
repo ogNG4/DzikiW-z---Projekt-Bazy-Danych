@@ -10,6 +10,7 @@ function UserFooter() {
       as={"footer"}
       p={"2rem"}
       minH={"350px"}
+      
     
     >
       <GridItem>

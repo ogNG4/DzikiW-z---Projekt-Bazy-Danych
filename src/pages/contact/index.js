@@ -2,6 +2,8 @@
 import { useToast } from "@chakra-ui/react";
 import ContactForm from "../../components/User/ContactForm/ContactForm";
 import { useRouter } from "next/router";
+import SectionWrapper from "@/components/UI/SectionWrapper";
+import SectionHeader from "@/components/UI/SectionHeader";
 export default function Contact() {
   const router = useRouter();
   const toast = useToast();
@@ -36,7 +38,10 @@ export default function Contact() {
 
   return (
     <>
+    <SectionWrapper>
+      <SectionHeader title={'Skontaktuj się z nami'} />
     <ContactForm onSubmit={handleSubmit}/>
+    </SectionWrapper>
     </>
   );
 }

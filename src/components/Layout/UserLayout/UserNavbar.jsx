@@ -25,6 +25,7 @@ import { Link } from "@chakra-ui/next-js";
 
 import { Logo } from "../Logo/Logo";
 import { useUser } from "@/context/UserContext";
+import Head from "next/head";
 
 
 export function UserNavbar() {
@@ -43,7 +44,9 @@ export function UserNavbar() {
 
 
   return (
-    <Box  bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'12'} width={'100%'}>
+    <>
+    
+    <Box  bg={useColorModeValue("gray.100", "gray.900")}  px={{base: '1.5rem', xl: '10rem'}} position={'fixed'} top={0} zIndex={'12'} width={'100%'} mb={'10rem'}>
       <Flex h={'6rem'} alignItems={"center"} justifyContent={"space-between"}  >
         <IconButton
           size={"md"}
@@ -83,7 +86,7 @@ export function UserNavbar() {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem ><Link href='/my-rents'>Moje rezerwacje</Link></MenuItem>
+             { profile && <MenuItem ><Link href={`my-rents/${profile.id}/`}>Moje rezerwacje</Link></MenuItem>}
               <MenuDivider />
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />
@@ -113,5 +116,6 @@ export function UserNavbar() {
         </Box>
       ) : null}
     </Box>
+    </>
   );
 }
