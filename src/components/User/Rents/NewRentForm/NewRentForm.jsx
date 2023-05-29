@@ -1,10 +1,22 @@
 import { useForm } from "react-hook-form";
-import { FormControl, Flex, FormLabel, Input, Text, Button, Box } from "@chakra-ui/react";
+import {
+  FormControl,
+  Flex,
+  FormLabel,
+  Input,
+  Text,
+  Button,
+  Box,
+} from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 
 export default function NewRentForm({ onSubmit, profile }) {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -52,10 +64,10 @@ export default function NewRentForm({ onSubmit, profile }) {
               value={startDate}
               onChange={handleStartDateChange}
               max={endDate}
-              required
+              step={3600}
             />
             {errors.startDate && errors.startDate.type === "required" && (
-              <Text color={"yellow.200"}>To pole jest wymagane</Text> 
+              <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
             <FormLabel>Do</FormLabel>
             <Input
@@ -64,7 +76,6 @@ export default function NewRentForm({ onSubmit, profile }) {
               value={endDate}
               onChange={handleEndDateChange}
               min={startDate}
-              required
             />
             {errors.endDate && errors.endDate.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
@@ -108,10 +119,14 @@ export default function NewRentForm({ onSubmit, profile }) {
             <FormLabel>Numer telefonu</FormLabel>
             <Input
               type="number"
-              {...register("phoneNumber", { required: true })}
+              {...register("phoneNumber", {
+                required: true,
+                minLength: 9,
+                maxLength: 9,
+              })}
               defaultValue={profile.phoneNumber}
             />
-               {errors.phoneNumber && errors.phoneNumber.type === "required" && (
+            {errors.phoneNumber && errors.phoneNumber.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
             {errors.phoneNumber && errors.phoneNumber.type === "minLength" && (
@@ -120,7 +135,12 @@ export default function NewRentForm({ onSubmit, profile }) {
             {errors.phoneNumber && errors.phoneNumber.type === "maxLength" && (
               <Text color={"yellow.200"}>Numer jest za długi</Text>
             )}
-            <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
+            <Button
+              type="submit"
+              bg={"red.400"}
+              margin={"2rem auto"}
+              px={"2rem"}
+            >
               Wyślij
             </Button>
           </FormControl>

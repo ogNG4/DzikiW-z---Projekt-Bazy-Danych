@@ -11,8 +11,21 @@ import {
   NumberInput,
   NumberInputField,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
-export default function NewCarForm({ onSubmit}) {
+export default function NewCarForm({ onSubmit }) {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const submitHandler = (data) => {
+    onSubmit(data);
+    reset();
+  };
+
   return (
     <Box minH={"75vh"} mt={"5rem"}>
       <Text
@@ -24,8 +37,8 @@ export default function NewCarForm({ onSubmit}) {
         Dodaj pojazd
       </Text>
       <Flex
-        w={'auto'}
-        maxW={'600px'}
+        w={"auto"}
+        maxW={"600px"}
         margin={"2rem auto"}
         bg={"gray.700"}
         p={"1.5rem"}
@@ -34,25 +47,30 @@ export default function NewCarForm({ onSubmit}) {
         <FormControl
           as="form"
           spacing={"1rem"}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit(submitHandler)}
           textAlign={"center"}
         >
           <FormLabel>Zdjęcie</FormLabel>
-          <Input type="text" name="img" id="img" />
+          <Input type="text" {...register("img", { required: true })} />
+          {errors.img && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Marka</FormLabel>
-          <Input type="text" name="brand" id="brand" placeholder=' ' required/>
+          <Input type="text" {...register("brand", { required: true })} />
+          {errors.brand && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Model</FormLabel>
-          <Input type="text" name="model" id="model" required />
+          <Input type="text" {...register("model", { required: true })} />
+          {errors.model && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Pojemność </FormLabel>
-          <NumberInput name="capacity" id="capacity" required>
-            <NumberInputField placeholder="cm3" />
-          </NumberInput>
+          <Input type="number" {...register("capacity", { required: true })} />
           <FormLabel>Moc </FormLabel>
-          <NumberInput name="power" id="power" required>
-            <NumberInputField placeholder='KM' />
-          </NumberInput>
+          <Input type="number" {...register("power", { required: true })} />
           <FormLabel>Typ</FormLabel>
-          <Select type="text" name="type" id="type" placeholder='' required>
+          <Select type="text" {...register("type", { required: true })}>
             <option value="Sportowy">Sportowy</option>
             <option value="Hatchback">Hatchback</option>
             <option value="Combi">Kombi</option>
@@ -60,28 +78,48 @@ export default function NewCarForm({ onSubmit}) {
             <option value="Coupe">Coupe</option>
           </Select>
           <FormLabel>Rocznik</FormLabel>
-          <Input type="number" name="year" id="year" placeholder='' required/>
+          <Input
+            type="number"
+            {...register("year", {
+              required: true,
+              minLength: 9,
+              maxLength: 9,
+            })}
+          />
+          {errors.year && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
+          {errors.year && errors.year.type === "minLength" && (
+            <Text color={"yellow.200"}>Min 4 cyfry</Text>
+          )}
+          {errors.year && errors.year.type === "maxLength" && (
+            <Text color={"yellow.200"}>Max 4 cyfry</Text>
+          )}
           <FormLabel>Kolor</FormLabel>
-          <Input type="text" name="color" id="color" required/>
+          <Input type="text" {...register("color", { required: true })} />
+          {errors.color && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Cena za dobę</FormLabel>
-          <NumberInput name="price" id="price" required>
-            <NumberInputField />
-          </NumberInput>
+          <Input type="number" {...register("price", { required: true })} />
+          {errors.price && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Skrzynia biegów</FormLabel>
-          <Select type="text" name="transmission" id="transmission"  required>
+          <Select type="text" {...register("transmission", { required: true })}>
             <option value="automatyczna">Automatyczna</option>
             <option value="manualna">Manualna</option>
           </Select>
           <FormLabel>Opis</FormLabel>
           <Textarea
             type="text"
-            name="description"
-            id="description"
-            rows={10}
-            required
+            {...register("description", { required: true })}
           />
+          {errors.description && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
 
-          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}  >
+          <Button type="submit" bg={"red.400"} margin={"2rem auto"} px={"2rem"}>
             Wyślij
           </Button>
         </FormControl>

@@ -13,13 +13,7 @@ export default function NewCar() {
     !isAdmin ? router.replace("/") : null;
   }, []);
 
-  const newCarSubmitHandler = async (e) => {
-    e.preventDefault();
-    const form = new FormData(e.target);
-    const formData = {};
-    for (let [key, value] of form) {
-      formData[key] = value;
-    }
+  const handleSubmit = async (data) => {
     try {
       const response = await fetch("../api/admin/new-car", {
         method: "POST",
@@ -27,15 +21,17 @@ export default function NewCar() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
+  
       if (response.ok) {
+        router.push("/");
         toast({
-          title: "Pomyślnie dodano samochód",
-          status: "success",
+          title: 'Pomyślnie dodano samochoód',
+          status: 'success',
           duration: 2000,
           isClosable: true,
-          position: "top-right",
+          position: 'top-right'
         });
       } else {
         console.error(response);
@@ -46,7 +42,7 @@ export default function NewCar() {
   };
   return (
     <>
-      <NewCarForm onSubmit={newCarSubmitHandler} />
+      <NewCarForm onSubmit={handleSubmit} />
     </>
   );
 }
