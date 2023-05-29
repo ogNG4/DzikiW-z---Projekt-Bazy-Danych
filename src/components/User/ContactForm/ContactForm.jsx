@@ -17,10 +17,12 @@ export default function ContactForm({ onSubmit }) {
     handleSubmit,
     register,
     formState: { errors },
+    reset
   } = useForm();
 
   const submitHandler = (data) => {
     onSubmit(data);
+    reset();
   };
 
   return (

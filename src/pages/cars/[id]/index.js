@@ -38,7 +38,7 @@ export default function Car({ car }) {
 
   return (
     <Box w={"100%"} minH={"100vh"} mt={"7rem"} p={"2rem"}>
-      <Flex direction={"column"} gap={"15px"} fontSize={"2rem"}>
+      <Flex direction={"column"} gap={"15px"} fontSize={"2rem"} alignItems={'center'}>
         <Heading margin={"1rem auto"}>
           <HStack
             textTransform={"uppercase"}
@@ -52,8 +52,8 @@ export default function Car({ car }) {
           <Divider />
         </Heading>
         <Box
-          w={{ base: "90%", lg: "20%" }}
-          margin={"0 auto"}
+          w={{ base: "90%", lg: "30%" }}
+          
           h={"auto"}
           overflow={"hidden"}
         >
@@ -91,6 +91,7 @@ export default function Car({ car }) {
           <Text>Cena za dobę:</Text>
           <Text>{car.price} ZŁ</Text>
         </HStack>
+
        
         <HStack>
           <Button

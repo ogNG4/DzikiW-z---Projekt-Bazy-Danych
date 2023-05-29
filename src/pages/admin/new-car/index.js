@@ -31,16 +31,12 @@ export default function NewCar() {
       });
       if (response.ok) {
         toast({
-          title: 'Pomyślnie dodano samochód',
-          status: 'success',
+          title: "Pomyślnie dodano samochód",
+          status: "success",
           duration: 2000,
           isClosable: true,
-          position: 'top-right'
-        })
-
-        
-
-        
+          position: "top-right",
+        });
       } else {
         console.error(response);
       }
@@ -50,7 +46,7 @@ export default function NewCar() {
   };
   return (
     <>
-      <NewCarForm onSubmit={newCarSubmitHandler}  />
+      <NewCarForm onSubmit={newCarSubmitHandler} />
     </>
   );
 }
