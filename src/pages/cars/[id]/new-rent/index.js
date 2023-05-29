@@ -6,7 +6,7 @@ import { Box, Button, HStack, Text } from "@chakra-ui/react";
 import NewRentForm from "@/components/User/Rents/NewRentForm/NewRentForm";
 import { supabase } from "@/lib/supabase";
 
-export default function NewRentPage() {
+export default function NewRentPage({availableDates}) {
   const { profile } = useUser();
   const router = useRouter();
   const session = useSession();
@@ -57,7 +57,33 @@ export default function NewRentPage() {
 
   return (
     <>
-      <NewRentForm onSubmit={handleRent} profile={profile} />
+      <NewRentForm onSubmit={handleRent} profile={profile} availableDates = {availableDates} />
     </>
   );
+}
+export async function getServerSideProps({ params }) {
+  try {
+    const { id } = params;
+
+    const { data } = await supabase
+      .from("rents")
+      .select("startDate, endDate")
+      .eq("carId", id);
+
+    const availableDates = data.map((rent) => ({
+      startDate: rent.startDate,
+      endDate: rent.endDate,
+    }));
+
+    return {
+      props: {
+        availableDates,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      notFound: true,
+    };
+  }
 }

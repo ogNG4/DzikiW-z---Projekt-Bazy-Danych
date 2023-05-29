@@ -11,7 +11,7 @@ import {
 import { useSession } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 
-export default function NewRentForm({ onSubmit, profile }) {
+export default function NewRentForm({ onSubmit, profile, availableDates }) {
   const {
     register,
     handleSubmit,
@@ -25,11 +25,31 @@ export default function NewRentForm({ onSubmit, profile }) {
   };
 
   const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
+    const selectedStartDate = event.target.value;
+    const isStartDateAvailable = availableDates.every(
+      (date) =>
+        selectedStartDate < date.startDate || selectedStartDate > date.endDate
+    );
+
+    if (isStartDateAvailable) {
+      setStartDate(selectedStartDate);
+    } else {
+      console.log("Wybrana data rozpoczęcia rezerwacji jest niedostępna.");
+    }
   };
 
   const handleEndDateChange = (event) => {
-    setEndDate(event.target.value);
+    const selectedEndDate = event.target.value;
+    const isEndDateAvailable = availableDates.every(
+      (date) =>
+        selectedEndDate < date.startDate || selectedEndDate > date.endDate
+    );
+
+    if (isEndDateAvailable) {
+      setEndDate(selectedEndDate);
+    } else {
+      console.log("Wybrana data zakończenia rezerwacji jest niedostępna.");
+    }
   };
 
   return (
@@ -64,7 +84,7 @@ export default function NewRentForm({ onSubmit, profile }) {
               value={startDate}
               onChange={handleStartDateChange}
               max={endDate}
-              step={3600}
+              min={new Date().toISOString().slice(0, 16)}
             />
             {errors.startDate && errors.startDate.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
