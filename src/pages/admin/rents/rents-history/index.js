@@ -16,12 +16,13 @@ import {
   Box
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+
 import { useEffect } from "react";
 import { dateToString } from "@/utils/dateToString";
 import SectionHeader from "@/components/UI/SectionHeader";
 import AdminRentDetailCard from "@/components/Admin/Rents/AdminRentDetailCard";
 
-export default function CurrentRents({ rents }) {
+export default function RentsHistory({ rents }) {
   const isAdmin = useAdmin();
   const router = useRouter();
 
@@ -32,7 +33,7 @@ export default function CurrentRents({ rents }) {
     <>
 
         
-     <SectionHeader title={'Aktualne rezerwacje'} />
+     <SectionHeader title={'Historia rezerwacji'} />
      <Flex direction={'column'} gap={'1rem'} alignItems={'center'}>
      {rents.map((rent) => (
                 <AdminRentDetailCard key={rent.id} rent={rent} />
@@ -49,8 +50,7 @@ export async function getServerSideProps() {
       .from("rents")
       .select(`*, cars(*), profiles(*)`)
       .order("created_at", { ascending: false })
-      .gte('endDate', today)
-      .eq('isFinished', false);
+      .eq('isFinished', true);
       
     return {
       props: {

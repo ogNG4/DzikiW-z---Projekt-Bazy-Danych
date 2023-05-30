@@ -21,7 +21,7 @@ import { dateToString } from "@/utils/dateToString";
 import SectionHeader from "@/components/UI/SectionHeader";
 import AdminRentDetailCard from "@/components/Admin/Rents/AdminRentDetailCard";
 
-export default function CurrentRents({ rents }) {
+export default function CompletedRents({ rents  }) {
   const isAdmin = useAdmin();
   const router = useRouter();
 
@@ -32,10 +32,10 @@ export default function CurrentRents({ rents }) {
     <>
 
         
-     <SectionHeader title={'Aktualne rezerwacje'} />
+     <SectionHeader title={'Zakończone rezerwacje'} />
      <Flex direction={'column'} gap={'1rem'} alignItems={'center'}>
      {rents.map((rent) => (
-                <AdminRentDetailCard key={rent.id} rent={rent} />
+                <AdminRentDetailCard key={rent.id} rent={rent}  />
               ))}
      </Flex>
     </>
@@ -43,21 +43,21 @@ export default function CurrentRents({ rents }) {
 }
 
 export async function getServerSideProps() {
-  try {
-    const today = new Date().toISOString(); 
-    const { data, error } = await supabase
-      .from("rents")
-      .select(`*, cars(*), profiles(*)`)
-      .order("created_at", { ascending: false })
-      .gte('endDate', today)
-      .eq('isFinished', false);
-      
-    return {
-      props: {
-        rents: data,
-      },
-    };
-  } catch (error) {
-    console.log(error);
+    try {
+        const today = new Date().toISOString(); 
+  
+      const { data, error } = await supabase
+        .from('rents')
+        .select(`*, cars(*), profiles(*)`)
+        .order('created_at', { ascending: false })
+        .lte('endDate', today)
+        .eq('isFinished', false);
+      return {
+        props: {
+          rents: data,
+        },
+      };
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
