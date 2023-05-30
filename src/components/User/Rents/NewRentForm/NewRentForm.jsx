@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { useState } from "react";
+import Cars from "@/pages/cars";
 
 export default function NewRentForm({ onSubmit, profile, availableDates }) {
   const {
@@ -19,6 +20,7 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
   } = useForm();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+ 
 
   const onSubmitHandler = (data) => {
     onSubmit(data);
@@ -26,11 +28,13 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
 
   const handleStartDateChange = (event) => {
     const selectedStartDate = event.target.value;
-    const isStartDateAvailable = availableDates.every(
-      (date) =>
-        selectedStartDate < date.startDate || selectedStartDate > date.endDate
-    );
-
+    const isStartDateAvailable = availableDates.every((date) => {
+      const startDateOverlap = selectedStartDate <= date.endDate && selectedStartDate >= date.startDate;
+      const endDateOverlap = endDate <= date.endDate && endDate >= date.startDate;
+      const insideRange = selectedStartDate >= date.startDate && endDate <= date.endDate;
+      return !startDateOverlap && !endDateOverlap && !insideRange;
+    });
+  
     if (isStartDateAvailable) {
       setStartDate(selectedStartDate);
     } else {
@@ -40,11 +44,13 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
 
   const handleEndDateChange = (event) => {
     const selectedEndDate = event.target.value;
-    const isEndDateAvailable = availableDates.every(
-      (date) =>
-        selectedEndDate < date.startDate || selectedEndDate > date.endDate
-    );
-
+    const isEndDateAvailable = availableDates.every((date) => {
+      const startDateOverlap = startDate <= date.endDate && startDate >= date.startDate;
+      const endDateOverlap = selectedEndDate <= date.endDate && selectedEndDate >= date.startDate;
+      const insideRange = startDate >= date.startDate && selectedEndDate <= date.endDate;
+      return !startDateOverlap && !endDateOverlap && !insideRange;
+    });
+  
     if (isEndDateAvailable) {
       setEndDate(selectedEndDate);
     } else {
@@ -54,14 +60,7 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
 
   return (
     <Box minH={"75vh"} mt={"5rem"}>
-      <Text
-        margin={"auto"}
-        width={"max-content"}
-        fontSize={{ base: "2rem", md: "3rem" }}
-        fontWeight={"500"}
-      >
-        Wynajmij pojazd
-      </Text>
+     
       <Flex
         w={"auto"}
         maxW={"600px"}
@@ -85,6 +84,7 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
               onChange={handleStartDateChange}
               max={endDate}
               min={new Date().toISOString().slice(0, 16)}
+             
             />
             {errors.startDate && errors.startDate.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
@@ -96,6 +96,7 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
               value={endDate}
               onChange={handleEndDateChange}
               min={startDate}
+              
             />
             {errors.endDate && errors.endDate.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
@@ -155,6 +156,7 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
             {errors.phoneNumber && errors.phoneNumber.type === "maxLength" && (
               <Text color={"yellow.200"}>Numer jest za długi</Text>
             )}
+            <Text>{availableDates.carPrice}</Text>
             <Button
               type="submit"
               bg={"red.400"}
@@ -163,6 +165,7 @@ export default function NewRentForm({ onSubmit, profile, availableDates }) {
             >
               Wyślij
             </Button>
+            
           </FormControl>
         )}
       </Flex>
