@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   FormControl,
   Flex,
@@ -11,9 +13,8 @@ import {
   NumberInput,
   NumberInputField,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
 
-export default function NewCarForm({ onSubmit }) {
+export default function CarForm({ onSubmit, car }) {
   const {
     handleSubmit,
     register,
@@ -34,7 +35,7 @@ export default function NewCarForm({ onSubmit }) {
         fontSize={{ base: "2rem", md: "3rem" }}
         fontWeight={"500"}
       >
-        Dodaj pojazd
+        {car ? "Edytuj pojazd" : "Dodaj pojazd"}
       </Text>
       <Flex
         w={"auto"}
@@ -51,26 +52,56 @@ export default function NewCarForm({ onSubmit }) {
           textAlign={"center"}
         >
           <FormLabel>Zdjęcie</FormLabel>
-          <Input type="text" {...register("img", { required: true })} />
+          <Input
+            type="text"
+            {...register("img", { required: true })}
+            defaultValue={car ? car.img : ""}
+          />
           {errors.img && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>
           )}
           <FormLabel>Marka</FormLabel>
-          <Input type="text" {...register("brand", { required: true })} />
+          <Input
+            type="text"
+            {...register("brand", { required: true })}
+            defaultValue={car ? car.brand : ""}
+          />
           {errors.brand && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>
           )}
           <FormLabel>Model</FormLabel>
-          <Input type="text" {...register("model", { required: true })} />
+          <Input
+            type="text"
+            {...register("model", { required: true })}
+            defaultValue={car ? car.model : ""}
+          />
           {errors.model && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>
           )}
-          <FormLabel>Pojemność </FormLabel>
-          <Input type="number" {...register("capacity", { required: true })} />
-          <FormLabel>Moc </FormLabel>
-          <Input type="number" {...register("power", { required: true })} />
+          <FormLabel>Pojemność</FormLabel>
+          <Input
+            type="number"
+            {...register("capacity", { required: true })}
+            defaultValue={car ? car.capacity : ""}
+          />
+          {errors.capacity && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
+          <FormLabel>Moc</FormLabel>
+          <Input
+            type="number"
+            {...register("power", { required: true })}
+            defaultValue={car ? car.power : ""}
+          />
+          {errors.power && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Typ</FormLabel>
-          <Select type="text" {...register("type", { required: true })}>
+          <Select
+            type="text"
+            {...register("type", { required: true })}
+            defaultValue={car ? car.type : ""}
+          >
             <option value="Sportowy">Sportowy</option>
             <option value="Hatchback">Hatchback</option>
             <option value="Combi">Kombi</option>
@@ -82,9 +113,10 @@ export default function NewCarForm({ onSubmit }) {
             type="number"
             {...register("year", {
               required: true,
-              minLength: 9,
-              maxLength: 9,
+              minLength: 4,
+              maxLength: 4,
             })}
+            defaultValue={car ? car.year : ""}
           />
           {errors.year && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>
@@ -96,17 +128,38 @@ export default function NewCarForm({ onSubmit }) {
             <Text color={"yellow.200"}>Max 4 cyfry</Text>
           )}
           <FormLabel>Kolor</FormLabel>
-          <Input type="text" {...register("color", { required: true })} />
+          <Input
+            type="text"
+            {...register("color", { required: true })}
+            defaultValue={car ? car.color : ""}
+          />
           {errors.color && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>
           )}
           <FormLabel>Cena za dobę</FormLabel>
-          <Input type="number" {...register("price", { required: true })} />
+          <Input
+            type="number"
+            {...register("price", { required: true })}
+            defaultValue={car ? car.price : ""}
+          />
           {errors.price && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>
           )}
+          <FormLabel>Miesięczne koszty utrzymania</FormLabel>
+          <Input
+            type="number"
+            {...register("upkeep", { required: true })}
+            defaultValue={car ? car.upkeep : ""}
+          />
+          {errors.upkeep && (
+            <Text color={"yellow.200"}>To pole jest wymagane</Text>
+          )}
           <FormLabel>Skrzynia biegów</FormLabel>
-          <Select type="text" {...register("transmission", { required: true })}>
+          <Select
+            type="text"
+            {...register("transmission", { required: true })}
+            defaultValue={car ? car.transmission : ""}
+          >
             <option value="automatyczna">Automatyczna</option>
             <option value="manualna">Manualna</option>
           </Select>
@@ -114,6 +167,7 @@ export default function NewCarForm({ onSubmit }) {
           <Textarea
             type="text"
             {...register("description", { required: true })}
+            defaultValue={car ? car.description : ""}
           />
           {errors.description && (
             <Text color={"yellow.200"}>To pole jest wymagane</Text>

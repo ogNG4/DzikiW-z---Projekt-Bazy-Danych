@@ -1,16 +1,9 @@
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabase";
-import EditCarForm from "@/components/Admin/Forms/EditCarForm/EditCarForm";
+import CarForm from "@/components/Admin/Forms/CarForm/CarForm";
 import { useToast } from "@chakra-ui/react";
 export default function EditCar({ car }) {
-  const editCarHandler = async (e) => {
-    e.preventDefault();
-    const form = new FormData(e.target);
-    const formData = {};
-    for (let [key, value] of form) {
-      formData[key] = value;
-    }
-
+  const handleSubmit = async (data) => {
     try {
       const response = await fetch(`/api/admin/cars/editCar/${car.id}`, {
         method: "POST",
@@ -18,17 +11,17 @@ export default function EditCar({ car }) {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
-      if(response.ok){
+      if (response.ok) {
         toast({
-            title: 'Pomyślnie wykonano edycję',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-            position: 'top-right'
-          })
+          title: "Pomyślnie wykonano edycję",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -37,7 +30,7 @@ export default function EditCar({ car }) {
   return (
     <>
       <h1>Edit Car</h1>
-      <EditCarForm car={car} onSubmit={editCarHandler} />
+      <CarForm car={car} onSubmit={handleSubmit} />
     </>
   );
 }

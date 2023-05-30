@@ -1,4 +1,4 @@
-import NewCarForm from "../../../components/Admin/Forms/NewCarForm/NewCarForm";
+import NewCarForm from "../../../components/Admin/Forms/CarForm/CarForm";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAdmin } from "@/context/AdminContext";
@@ -23,15 +23,15 @@ export default function NewCar() {
         },
         body: JSON.stringify(data),
       });
-  
+
       if (response.ok) {
         router.push("/");
         toast({
-          title: 'Pomyślnie dodano samochoód',
-          status: 'success',
+          title: "Pomyślnie dodano samochoód",
+          status: "success",
           duration: 2000,
           isClosable: true,
-          position: 'top-right'
+          position: "top-right",
         });
       } else {
         console.error(response);
