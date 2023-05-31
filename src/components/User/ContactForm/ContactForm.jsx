@@ -44,15 +44,27 @@ export default function ContactForm({ onSubmit }) {
             textAlign={"center"}
           >
             <FormLabel>Imię</FormLabel>
-            <Input type="text" {...register("firstName", { required: true })} />
+            <Input type="text" {...register("firstName", { required: true, minLength:2, maxLength:18 })} />
             {errors.firstName && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
+            {errors.firstName && errors.firstName.type==="minLength" &&  (
+              <Text color={"yellow.200"}>Imie jest za krótkie (min 2 znaki)</Text>
+            )}
+            {errors.firstName && errors.firstName.type==="maxLength" &&  (
+              <Text color={"yellow.200"}>Imie jest za długie (max 18 znaków)</Text>
+            )}
 
             <FormLabel>Nazwisko</FormLabel>
-            <Input type="text" {...register("lastName", { required: true })} />
+            <Input type="text" {...register("lastName", { required: true, minLength:2, maxLength:18 })} />
             {errors.lastName && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
+            )}
+            {errors.lastName && errors.lastName.type==="minLength" &&  (
+              <Text color={"yellow.200"}>Nazwisko jest za krótkie (min 2 znaki)</Text>
+            )}
+            {errors.lastName && errors.lastName.type==="maxLength" &&  (
+              <Text color={"yellow.200"}>Nazwisko jest za długie (max 18 znaków)</Text>
             )}
 
             <FormLabel>E-mail</FormLabel>
