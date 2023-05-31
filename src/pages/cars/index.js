@@ -62,16 +62,15 @@ export default function Cars({ cars }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
-    const { data } = await supabase.from("cars").select("*");
+    
+    const { data } = await supabase.from("cars").select("*").order("brand", { ascending: false });
 
     return {
       props: {
         cars: data,
       },
-
-      revalidate: 60,
     };
   } catch (error) {
     console.log(error);

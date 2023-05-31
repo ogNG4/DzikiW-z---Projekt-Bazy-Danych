@@ -2,7 +2,18 @@ import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabase";
 import CarForm from "@/components/Admin/Forms/CarForm/CarForm";
 import { useToast } from "@chakra-ui/react";
+import { useAdmin } from "@/context/AdminContext";
+import { useEffect } from "react";
+
 export default function EditCar({ car }) {
+
+  const isAdmin = useAdmin();
+  const router = useRouter();
+
+  useEffect(() => {
+    !isAdmin ? router.replace("/") : null;
+  }, []);
+
   const handleSubmit = async (data) => {
     try {
       const response = await fetch(`/api/admin/cars/editCar/${car.id}`, {

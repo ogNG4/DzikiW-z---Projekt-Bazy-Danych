@@ -5,8 +5,17 @@ import AdminCarCard from "@/components/Admin/Cars/CarCard/AdminCarCard";
 import Header from "@/components/Admin/UI/Header/Header";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useAdmin } from "@/context/AdminContext";
+
 
 export default function CarsList({ cars }) {
+
+  const isAdmin = useAdmin();
+  const router = useRouter();
+
+  useEffect(() => {
+    !isAdmin ? router.replace("/") : null;
+  }, []);
 
   return (
     <>
@@ -31,7 +40,8 @@ export default function CarsList({ cars }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+ 
   try {
     const { data } = await supabase.from("cars").select("*").order('created_at',{ascending: false});
 
