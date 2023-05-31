@@ -34,8 +34,6 @@ export default function Car({ car }) {
   const session = useSession();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-
-
   return (
     <Box w={"100%"} minH={"100vh"} mt={"7rem"} p={"2rem"}>
       <Flex direction={"column"} gap={"15px"} fontSize={"2rem"} alignItems={'center'}>
@@ -59,40 +57,40 @@ export default function Car({ car }) {
         >
           <Image src={car.img} objectFit={"cover"} boxSize={"100%"} />
         </Box>
-        <HStack>
-          <Text>Moc:</Text>
-          <Text>{car.power} KM</Text>
-        </HStack>
-        <HStack>
-          <Text>Pojemność:</Text>
-          <Text>{car.capacity} CM3</Text>
-        </HStack>
-        <HStack>
-          <Text>Kolor:</Text>
-          <Text>{car.color}</Text>
-        </HStack>
-        <HStack>
-          <Text>Typ:</Text>
-          <Text>{car.type}</Text>
-        </HStack>
-        <HStack>
-          <Text>Skrzynia biegów:</Text>
-          <Text>{car.transmission}</Text>
-        </HStack>
-        <HStack>
-          <Text>Rocznik:</Text>
-          <Text>{car.year}</Text>
-        </HStack>
-        <HStack>
-          <Text>Opis:</Text>
-          <Text>{car.description}</Text>
-        </HStack>
-        <HStack>
-          <Text>Cena za dobę:</Text>
-          <Text>{car.price} ZŁ</Text>
-        </HStack>
+ 
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Moc:</Text>
+  <Text>{car.power} KM</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Pojemność:</Text>
+  <Text>{car.capacity} CM3</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Kolor:</Text>
+  <Text>{car.color}</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Typ:</Text>
+  <Text>{car.type}</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Skrzynia biegów:</Text>
+  <Text>{car.transmission}</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Rocznik:</Text>
+  <Text>{car.year}</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Opis:</Text>
+  <Text>{car.description}</Text>
+</HStack>
+<HStack spacing={4}>
+  <Text fontWeight="bold" color="gray.600">Cena za dobę:</Text>
+  <Text>{car.price} ZŁ</Text>
+</HStack>
 
-       
         <HStack>
           <Button
             bg="tomato"
