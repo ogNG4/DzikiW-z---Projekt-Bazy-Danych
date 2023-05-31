@@ -97,6 +97,7 @@ export default function Car({ car }) {
           <Button
             bg="tomato"
             onClick={()=>{session? router.push(`/cars/${car.id}/new-rent`) : router.push("/login")}}
+            // onClick={()=>{router.push(`/cars/${car.id}/new-rent`) }}
           >
             Wynajmij
           </Button>

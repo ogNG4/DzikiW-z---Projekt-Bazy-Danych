@@ -11,8 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import SectionHeader from "@/components/UI/SectionHeader";
+import { useSession } from "@supabase/auth-helpers-react";
 
-export default function ContactForm({ onSubmit }) {
+export default function ContactForm({ onSubmit, profile }) {
+  const session = useSession()
   const {
     handleSubmit,
     register,
@@ -44,7 +46,7 @@ export default function ContactForm({ onSubmit }) {
             textAlign={"center"}
           >
             <FormLabel>Imię</FormLabel>
-            <Input type="text" {...register("firstName", { required: true, minLength:2, maxLength:18 })} />
+            <Input type="text" {...register("firstName", { required: true, minLength:2, maxLength:18 })} defaultValue={(session?profile?.firstName : '')} />
             {errors.firstName && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
@@ -56,7 +58,7 @@ export default function ContactForm({ onSubmit }) {
             )}
 
             <FormLabel>Nazwisko</FormLabel>
-            <Input type="text" {...register("lastName", { required: true, minLength:2, maxLength:18 })} />
+            <Input type="text" {...register("lastName", { required: true, minLength:2, maxLength:18 })} defaultValue={(session?profile?.lastName : '')} />
             {errors.lastName && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
@@ -68,7 +70,7 @@ export default function ContactForm({ onSubmit }) {
             )}
 
             <FormLabel>E-mail</FormLabel>
-            <Input type="email" {...register("email", { required: true })} />
+            <Input type="email" {...register("email", { required: true })} defaultValue={(session?profile?.email : '')} />
             {errors.email && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
@@ -81,6 +83,7 @@ export default function ContactForm({ onSubmit }) {
                 minLength: 9,
                 maxLength: 9,
               })}
+              defaultValue={(session?profile?.phoneNumber : '')}
             />
             {errors.phoneNumber && errors.phoneNumber.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>

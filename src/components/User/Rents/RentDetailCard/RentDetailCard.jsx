@@ -1,5 +1,5 @@
 import { dateToString } from "@/utils/dateToString";
-import { Card, Image, Flex, Box, Text, VStack } from "@chakra-ui/react";
+import { Card, Image, Flex, Box, Text, VStack, Button } from "@chakra-ui/react";
 import Link from "next/link";
 
 export default function RentDetailCard({ rent }) {
@@ -49,14 +49,26 @@ export default function RentDetailCard({ rent }) {
             </Text>
             <Text>{dateToString(rent.endDate)}</Text>
           </VStack>
+          <Button>
+            <Text fontSize={"1.2rem"} fontWeight={"500"}>
+              Usuń
+            </Text>
+          </Button>
         </Flex>
         <Flex gap={"1rem"}>
           <VStack align={"left"}>
             <Text fontSize={"1.2rem"} fontWeight={"500"}>
-              Imię:
+              Marka:
             </Text>
-            <Text>siema</Text>
+            <Text>{rent.cars.brand}</Text>
           </VStack>
+          <VStack align={"left"}>
+            <Text fontSize={"1.2rem"} fontWeight={"500"}>
+              Model:
+            </Text>
+            <Text>{rent.cars.model}</Text>
+          </VStack>
+          
         </Flex>
       </Flex>
     

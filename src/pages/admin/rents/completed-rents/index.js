@@ -44,7 +44,9 @@ export default function CompletedRents({ rents  }) {
 
 export async function getServerSideProps() {
     try {
+    
         const today = new Date().toISOString(); 
+        
   
       const { data, error } = await supabase
         .from('rents')
@@ -52,6 +54,7 @@ export async function getServerSideProps() {
         .order('created_at', { ascending: false })
         .lte('endDate', today)
         .eq('isFinished', false);
+        console.log(today);
       return {
         props: {
           rents: data,

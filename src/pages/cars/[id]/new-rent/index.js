@@ -8,10 +8,10 @@ import { supabase } from "@/lib/supabase";
 import SectionWrapper from "@/components/UI/SectionWrapper";
 import SectionHeader from "@/components/UI/SectionHeader";
 
+
 export default function NewRentPage({ availableDates }) {
   const { profile } = useUser();
   const router = useRouter();
-  const session = useSession();
 
   const handleRent = async (data) => {
     const carId = router.query.id;
@@ -59,18 +59,18 @@ export default function NewRentPage({ availableDates }) {
 
   return (
     <>
-    <SectionWrapper>
-      <SectionHeader title={'Wypożycz samochód'} />
-      <NewRentForm
-        onSubmit={handleRent}
-        profile={profile}
-        availableDates={availableDates}
-      />
+      <SectionWrapper>
+        <SectionHeader title={"Wypożycz samochód"} />
+        <NewRentForm
+          onSubmit={handleRent}
+          profile={profile}
+          availableDates={availableDates}
+        />
       </SectionWrapper>
     </>
   );
 }
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   try {
     const { id } = params;
 

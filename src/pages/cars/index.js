@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { supabase } from "@/lib/supabase";
-
 import CarCard from "@/components/User/Cars/CarDetailCard/CarDetailCard";
 import SortForm from "@/components/User/CarsFilters/SortForm";
 import { useRouter } from "next/router";
 import SectionHeader from "@/components/UI/SectionHeader";
 
 export default function Cars({ cars }) {
-
   const [sortOption, setSortOption] = useState("");
 
   const handleSortChange = (event) => {
@@ -24,12 +22,9 @@ export default function Cars({ cars }) {
     ["price-desc", (a, b) => b.price - a.price],
     ["price-asc", (a, b) => a.price - b.price],
   ]);
-  
+
   const sortedCars = [...cars].sort(sortFunctions.get(sortOption) || (() => 0));
 
-
-
- 
   return (
     <Flex
       minH={"100vh"}
@@ -40,7 +35,7 @@ export default function Cars({ cars }) {
       width={"100%"}
     >
       <Box w={"max-content"}>
-       <SectionHeader title={'Nasze samochody'} />
+        <SectionHeader title={"Nasze samochody"} />
       </Box>
       <SortForm handleSortChange={handleSortChange} />
       <Grid
@@ -64,8 +59,10 @@ export default function Cars({ cars }) {
 
 export async function getServerSideProps() {
   try {
-    
-    const { data } = await supabase.from("cars").select("*").order("brand", { ascending: false });
+    const { data } = await supabase
+      .from("cars")
+      .select("*")
+      .order("brand", { ascending: false });
 
     return {
       props: {

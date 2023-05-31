@@ -9,6 +9,8 @@ import CreateTable from "@/lib/supabase";
 export default function App({ Component, pageProps }) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
 
+  
+
   return (
     <SessionContextProvider
       supabaseClient={supabase}
