@@ -35,6 +35,13 @@ export default function NewCar() {
         });
       } else {
         console.error(response);
+        toast({
+          title: "Błąd",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       }
     } catch (error) {
       console.error(error);

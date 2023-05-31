@@ -115,6 +115,8 @@ export default function CarForm({ onSubmit, car }) {
               required: true,
               minLength: 4,
               maxLength: 4,
+              min: 1950,
+              max: 2024,
             })}
             defaultValue={car ? car.year : ""}
           />
@@ -126,6 +128,9 @@ export default function CarForm({ onSubmit, car }) {
           )}
           {errors.year && errors.year.type === "maxLength" && (
             <Text color={"yellow.200"}>Max 4 cyfry</Text>
+          )}
+          {errors.year && errors.year.type === "min" && (
+            <Text color={"yellow.200"}>Minimalny rocznik to 1950</Text>
           )}
           <FormLabel>Kolor</FormLabel>
           <Input
@@ -166,7 +171,7 @@ export default function CarForm({ onSubmit, car }) {
           <FormLabel>Opis</FormLabel>
           <Textarea
             type="text"
-            {...register("description", { required: true })}
+            {...register("description", { required: true, maxLength: 500 })}
             defaultValue={car ? car.description : ""}
           />
           {errors.description && (

@@ -21,9 +21,10 @@ export default function MyRents({ rents }) {
     <>
       <SectionWrapper>
         <SectionHeader title={"Moje rezerwacje"} />
-        <Flex direction={'column'} gap={'1rem'} alignItems={'center'}>
+        <Flex direction={"column"} gap={"1rem"} alignItems={"center"}>
           {rents &&
             rents.map((rent) => <RentDetailCard key={rent.id} rent={rent} />)}
+            {rents.length == 0 && <p>Pizda</p>}
         </Flex>
       </SectionWrapper>
     </>

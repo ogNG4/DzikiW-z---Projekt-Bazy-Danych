@@ -30,7 +30,7 @@ export function UserProvider({ children }) {
     };
 
     fetchUserData();
-  }, [session?.user?.id, profile]);
+  }, [session?.user?.id]);
 
   return (
     <UserContext.Provider value={{ profile }}>{children}</UserContext.Provider>
