@@ -86,7 +86,7 @@ export function UserNavbar() {
               />
             </MenuButton>
             <MenuList>
-             { profile && <MenuItem ><Link href={`my-rents/${profile.id}/`}>Moje rezerwacje</Link></MenuItem>}
+             { profile && <MenuItem ><Link href={`${profile.id}/my-rents/`}>Moje rezerwacje</Link></MenuItem>}
               <MenuDivider />
               <MenuItem>Link 2</MenuItem>
               <MenuDivider />

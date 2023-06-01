@@ -10,11 +10,11 @@ import Pagination from "@/components/Pagination/Pagination";
 import { paginate } from "@/utils/paginate";
 
 export default function Cars({ cars }) {
-  console.log(cars);
+  // console.log(cars);
   const [sortOption, setSortOption] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
-  const paginatedPosts = paginate(cars, currentPage, pageSize);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const pageSize = 10;
+  // const paginatedPosts = paginate(cars, currentPage, pageSize);
  
   const onPageChange = (page) => {
     setCurrentPage(page);
@@ -34,8 +34,8 @@ export default function Cars({ cars }) {
     ["price-asc", (a, b) => a.price - b.price],
   ]);
 
-  const sortedCars = paginatedPosts.sort(sortFunctions.get(sortOption) || (() => 0));
-
+  // const sortedCars = paginatedPosts.sort(sortFunctions.get(sortOption) || (() => 0));
+  const sortedCars = cars.sort(sortFunctions.get(sortOption) || (() => 0));
 
   return (
     <Flex
@@ -64,12 +64,12 @@ export default function Cars({ cars }) {
         {sortedCars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
-        <Pagination
+        {/* <Pagination
         items={cars.length} // 100
         currentPage={currentPage} // 1
         pageSize={pageSize} // 10
         onPageChange={onPageChange}
-        />
+        /> */}
       </Grid>
     </Flex>
   );
