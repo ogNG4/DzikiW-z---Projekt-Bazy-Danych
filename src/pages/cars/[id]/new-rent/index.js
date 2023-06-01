@@ -8,8 +8,7 @@ import { supabase } from "@/lib/supabase";
 import SectionWrapper from "@/components/UI/SectionWrapper";
 import SectionHeader from "@/components/UI/SectionHeader";
 
-
-export default function NewRentPage({ availableDates }) {
+export default function NewRentPage({ availableDates, carData }) {
   const { profile } = useUser();
   const router = useRouter();
 
@@ -65,6 +64,7 @@ export default function NewRentPage({ availableDates }) {
           onSubmit={handleRent}
           profile={profile}
           availableDates={availableDates}
+          car={carData}
         />
       </SectionWrapper>
     </>
@@ -74,22 +74,26 @@ export async function getServerSideProps({ params, req }) {
   try {
     const { id } = params;
 
-    const { data } = await supabase
+    const { data: rentData } = await supabase
       .from("rents")
-      .select(`startDate, endDate, cars(price)`)
+      .select(`startDate, endDate`)
       .eq("carId", id);
 
-    const availableDates = data.map((rent) => ({
+    const { data: carData } = await supabase
+      .from("cars")
+      .select('model, brand, price, img')
+      .eq("id", id)
+      .single();
+
+    const availableDates = rentData.map((rent) => ({
       startDate: rent.startDate,
       endDate: rent.endDate,
-      carPrice: rent.cars.price,
     }));
-
-    console.log(availableDates);
 
     return {
       props: {
         availableDates,
+        carData,
       },
     };
   } catch (error) {

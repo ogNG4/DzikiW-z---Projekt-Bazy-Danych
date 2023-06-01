@@ -6,9 +6,9 @@ import { useAdmin } from "@/context/AdminContext";
 import { useEffect } from "react";
 
 export default function EditCar({ car }) {
-
   const isAdmin = useAdmin();
   const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     !isAdmin ? router.replace("/") : null;
@@ -26,9 +26,18 @@ export default function EditCar({ car }) {
       });
 
       if (response.ok) {
+        router.push("/admin/cars-list");
         toast({
           title: "Pomyślnie wykonano edycję",
           status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      } else {
+        toast({
+          title: "Błąd",
+          status: "error",
           duration: 2000,
           isClosable: true,
           position: "top-right",

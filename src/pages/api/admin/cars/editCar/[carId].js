@@ -18,6 +18,7 @@ const carSchema = Joi.object({
 
 export default async function newCarHandler(req, res) {
   if (req.method === "POST") {
+    const {carId} = req.query;
     const { error, value } = carSchema.validate(req.body);
     if (error) {
       res.status(400).json({ error: error.details[0].message });
@@ -26,7 +27,8 @@ export default async function newCarHandler(req, res) {
 
     const { data, error: insertionError } = await supabase
       .from("cars")
-      .insert(value);
+      .update(value)
+      .eq("id", carId);
 
     if (!insertionError) {
       res.status(200).json(data);

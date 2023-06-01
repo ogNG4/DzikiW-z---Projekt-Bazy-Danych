@@ -6,9 +6,20 @@ import CarCard from "@/components/User/Cars/CarDetailCard/CarDetailCard";
 import SortForm from "@/components/User/CarsFilters/SortForm";
 import { useRouter } from "next/router";
 import SectionHeader from "@/components/UI/SectionHeader";
+import Pagination from "@/components/Pagination/Pagination";
+import { paginate } from "@/utils/paginate";
 
 export default function Cars({ cars }) {
+  console.log(cars);
   const [sortOption, setSortOption] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+  const paginatedPosts = paginate(cars, currentPage, pageSize);
+ 
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
+ 
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
@@ -23,7 +34,8 @@ export default function Cars({ cars }) {
     ["price-asc", (a, b) => a.price - b.price],
   ]);
 
-  const sortedCars = [...cars].sort(sortFunctions.get(sortOption) || (() => 0));
+  const sortedCars = paginatedPosts.sort(sortFunctions.get(sortOption) || (() => 0));
+
 
   return (
     <Flex
@@ -52,12 +64,18 @@ export default function Cars({ cars }) {
         {sortedCars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
+        <Pagination
+        items={cars.length} // 100
+        currentPage={currentPage} // 1
+        pageSize={pageSize} // 10
+        onPageChange={onPageChange}
+        />
       </Grid>
     </Flex>
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const { data } = await supabase
       .from("cars")

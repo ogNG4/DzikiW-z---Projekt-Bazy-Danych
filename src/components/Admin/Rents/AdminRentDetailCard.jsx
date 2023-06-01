@@ -7,11 +7,12 @@ export default function AdminRentDetailCard({ rent, showButton }) {
   console.log(showButton);
 
   const handleUpdate = async () => {
+    router.reload();
     const response = await fetch(`/api/admin/rents/finish-rent/${rent.id}`, {
       method: "POST",
     });
     if (response.ok) {
-      router.reload();
+     
     } else {
       console.error(response);
     }
