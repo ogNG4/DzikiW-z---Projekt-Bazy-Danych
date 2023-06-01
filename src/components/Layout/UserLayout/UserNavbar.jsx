@@ -86,12 +86,12 @@ export function UserNavbar() {
               />
             </MenuButton>
             <MenuList>
-             { profile && <MenuItem ><Link href={`${profile.id}/my-rents/`}>Moje rezerwacje</Link></MenuItem>}
+             { profile && <MenuItem ><Link href={`/my-rents/${profile.id}/`}>Moje rezerwacje</Link></MenuItem>}
               <MenuDivider />
-              <MenuItem>Link 2</MenuItem>
+              { profile && <MenuItem ><Link href={`/finished-rents/${profile.id}/`}>Zakończone rezerwacje</Link></MenuItem>}
               <MenuDivider />
               <MenuItem>
-              <Button onClick={logoutHandler }>Wyloguj się</Button>
+              <Button as={'a'} onClick={logoutHandler }>Wyloguj się</Button>
               </MenuItem>
             </MenuList>
           </Menu> </>) : (<Button

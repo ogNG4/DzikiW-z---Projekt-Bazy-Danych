@@ -24,7 +24,7 @@ export default function MyRents({ rents }) {
         <Flex direction={"column"} gap={"1rem"} alignItems={"center"}>
           {rents &&
             rents.map((rent) => <RentDetailCard key={rent.id} rent={rent} />)}
-            {rents.length == 0 && <p>Pizda</p>}
+            {rents.length == 0 && <p>Brak wyników..</p>}
         </Flex>
       </SectionWrapper>
     </>
@@ -37,7 +37,8 @@ export async function getServerSideProps({ params }) {
     const { data } = await supabase
       .from("rents")
       .select(`*, cars(*)`)
-      .eq("userId", profileId);
+      .eq("userId", profileId)
+      .eq('isFinished', false);
 
     return {
       props: {
