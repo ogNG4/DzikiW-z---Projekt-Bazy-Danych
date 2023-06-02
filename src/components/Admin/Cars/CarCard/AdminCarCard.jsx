@@ -6,12 +6,27 @@ export default function AdminCarCard({ car }) {
   const router = useRouter();
 
   const handleDelete = async () => {
-    const response = await fetch(`/api/admin/cars/deleteCar/${car.id}`, {
+    const response = await fetch(/api/admin/cars/deleteCar/${car.id}, {
       method: "DELETE",
     });
     if (response.ok) {
       router.reload();
+      toast({
+        title: 'Pomyślnie usunięto samochód',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right'
+      });
+
     } else {
+      toast({
+        title: 'Pojazd jest aktualnie wypożyczony. Nie można go usunąć.',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right'
+      });
       console.error(response.statusText);
     }
   };
