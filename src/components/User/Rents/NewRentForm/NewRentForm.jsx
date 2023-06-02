@@ -84,6 +84,18 @@ export default function NewRentForm({
     handleSubmit(onSubmitHandler)();
     setShowModal(false);
   };
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  const year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  if (month < 10) {
+    month = "0" + month;
+  }
+  let day = today.getDate();
+  if (day < 10) {
+    day = "0" + day;
+  }
+  const minStartDate = `${year}-${month}-${day}`;
 
   useEffect(() => {
     if (startDate && endDate) {
