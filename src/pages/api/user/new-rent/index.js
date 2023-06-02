@@ -14,7 +14,9 @@ export default async function newRentHandler(req, res) {
 
     if (error) {
       // Błąd podczas zapytania do bazy danych
-      res.status(500).json({ error: "Wystąpił błąd podczas sprawdzania dostępności samochodu." });
+      res.status(500).json({
+        error: "Wystąpił błąd podczas sprawdzania dostępności samochodu.",
+      });
       return;
     }
 
@@ -25,12 +27,16 @@ export default async function newRentHandler(req, res) {
     }
 
     // Brak rezerwacji w podanym zakresie dat, można kontynuować proces rezerwacji
-    const { data: insertedData, error: insertError } = await supabase.from("rents").insert(body);
+    const { data: insertedData, error: insertError } = await supabase
+      .from("rents")
+      .insert(body);
 
     if (!insertError) {
       res.status(200).json(insertedData);
     } else {
-      res.status(500).json({ error: "Wystąpił błąd podczas tworzenia rezerwacji." });
+      res
+        .status(500)
+        .json({ error: "Wystąpił błąd podczas tworzenia rezerwacji." });
     }
   } else {
     res.status(405).json({ error: "Metoda nieobsługiwana" });

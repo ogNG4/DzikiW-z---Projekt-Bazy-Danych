@@ -34,7 +34,7 @@ export async function getServerSideProps() {
       .select(`*, cars(*), profiles(*)`)
       .order("created_at", { ascending: false })
       .gte("endDate", today)
-      .eq("isFinished", false);
+      .eq('status', 'during');
 
     return {
       props: {

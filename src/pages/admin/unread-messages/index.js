@@ -29,7 +29,7 @@ export default function UnreadMessages({ messages }) {
 
 export async function getStaticProps() {
   try {
-    const { data } = await supabase.from("messages").select("*");
+    const { data } = await supabase.from("messages").select("*").order('created_at', { ascending: false });
 
     return {
       props: {

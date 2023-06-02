@@ -13,7 +13,7 @@ import {
   Tr,
   Tbody,
   Td,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
@@ -31,27 +31,25 @@ export default function RentsHistory({ rents }) {
   }, []);
   return (
     <>
-
-        
-     <SectionHeader title={'Historia rezerwacji'} />
-     <Flex direction={'column'} gap={'1rem'} alignItems={'center'}>
-     {rents.map((rent) => (
-                <AdminRentDetailCard key={rent.id} rent={rent} />
-              ))}
-     </Flex>
+      <SectionHeader title={"Historia rezerwacji"} />
+      <Flex direction={"column"} gap={"1rem"} alignItems={"center"}>
+        {rents.map((rent) => (
+          <AdminRentDetailCard key={rent.id} rent={rent} />
+        ))}
+      </Flex>
     </>
   );
 }
 
 export async function getServerSideProps() {
   try {
-    const today = new Date().toISOString(); 
+    const today = new Date().toISOString();
     const { data, error } = await supabase
       .from("rents")
       .select(`*, cars(*), profiles(*)`)
       .order("created_at", { ascending: false })
-      .eq('isFinished', true);
-      
+      .eq("status", 'finished');
+
     return {
       props: {
         rents: data,

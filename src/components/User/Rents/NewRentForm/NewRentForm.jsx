@@ -115,7 +115,7 @@ export default function NewRentForm({
           >
             <FormLabel>Od</FormLabel>
             <Input
-              type="datetime-local"
+              type="date"
               {...register("startDate", { required: true })}
               value={startDate}
               onChange={handleStartDateChange}
@@ -127,7 +127,7 @@ export default function NewRentForm({
             )}
             <FormLabel>Do</FormLabel>
             <Input
-              type="datetime-local"
+              type="date"
               {...register("endDate", { required: true })}
               value={endDate}
               onChange={handleEndDateChange}
@@ -214,7 +214,7 @@ export default function NewRentForm({
                   <ModalBody>
                     <Flex gap={"1rem"}>
                       <Box bg={"blue"} w={"max-content"}>
-                        <Image src={car.img} width={200} height={150} />
+                        {/* <Image src={car.img} width={200} height={150} /> */}
                       </Box>
                       <Flex direction={"column"}>
                         <HStack>

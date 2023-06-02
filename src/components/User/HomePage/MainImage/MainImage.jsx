@@ -14,7 +14,7 @@ function MainImage() {
       direction={"column"}
      
     >
-      <Image
+      {/* <Image
         src="/mainImg.jpg"
         objectFit={"cover"}
         w={"100%"}
@@ -23,7 +23,7 @@ function MainImage() {
         filter={"auto"}
         blur={"2px"}
         position={"absolute"}
-      />
+      /> */}
 
       <Flex  w={'100%'} justifyContent={'center'} zIndex={'10'}>
         <Flex

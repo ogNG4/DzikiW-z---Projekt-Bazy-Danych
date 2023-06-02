@@ -12,11 +12,13 @@ export default function AdminRentDetailCard({ rent, showButton }) {
       method: "POST",
     });
     if (response.ok) {
-     
     } else {
       console.error(response);
     }
   };
+
+  const isCurrentRentsPage = router.pathname === "/admin/rents/completed-rents";
+
   return (
     <Flex
       bg={"gray.700"}
@@ -118,9 +120,9 @@ export default function AdminRentDetailCard({ rent, showButton }) {
       </Flex>
 
       <Box>
-        <Button bg={"tomato"} onClick={handleUpdate}>
+        { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleUpdate}>
           Zatwierdź
-        </Button>
+        </Button>}
       </Box>
     </Flex>
   );

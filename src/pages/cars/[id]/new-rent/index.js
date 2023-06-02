@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
 import { useUser } from "@/context/UserContext";
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, useToast } from "@chakra-ui/react";
 import NewRentForm from "@/components/User/Rents/NewRentForm/NewRentForm";
 import { supabase } from "@/lib/supabase";
 import SectionWrapper from "@/components/UI/SectionWrapper";
@@ -11,6 +11,7 @@ import SectionHeader from "@/components/UI/SectionHeader";
 export default function NewRentPage({ availableDates, carData }) {
   const { profile } = useUser();
   const router = useRouter();
+  const toast = useToast();
 
   const handleRent = async (data) => {
     const carId = router.query.id;
@@ -48,8 +49,23 @@ export default function NewRentPage({ availableDates, carData }) {
 
       if (response.ok) {
         router.replace("/cars");
+        toast({
+          title: 'Pomyślnie złożono rezerwację',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right'
+        });
+
       } else {
         console.log("Failed to create rental");
+        toast({
+          title: 'Błąd',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right'
+        });
       }
     } catch (error) {
       console.log(error);

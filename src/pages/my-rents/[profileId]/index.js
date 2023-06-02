@@ -38,7 +38,7 @@ export async function getServerSideProps({ params }) {
       .from("rents")
       .select(`*, cars(*)`)
       .eq("userId", profileId)
-      .eq('isFinished', false);
+      .eq('status', 'during');
 
     return {
       props: {

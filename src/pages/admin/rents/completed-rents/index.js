@@ -13,7 +13,7 @@ import {
   Tr,
   Tbody,
   Td,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ import { dateToString } from "@/utils/dateToString";
 import SectionHeader from "@/components/UI/SectionHeader";
 import AdminRentDetailCard from "@/components/Admin/Rents/AdminRentDetailCard";
 
-export default function CompletedRents({ rents  }) {
+export default function CompletedRents({ rents }) {
   const isAdmin = useAdmin();
   const router = useRouter();
 
@@ -30,37 +30,33 @@ export default function CompletedRents({ rents  }) {
   }, []);
   return (
     <>
-
-        
-     <SectionHeader title={'Zakończone rezerwacje'} />
-     <Flex direction={'column'} gap={'1rem'} alignItems={'center'}>
-     {rents.map((rent) => (
-                <AdminRentDetailCard key={rent.id} rent={rent}  />
-              ))}
-     </Flex>
+      <SectionHeader title={"Zakończone rezerwacje"} />
+      <Flex direction={"column"} gap={"1rem"} alignItems={"center"}>
+        {rents.map((rent) => (
+          <AdminRentDetailCard key={rent.id} rent={rent} />
+        ))}
+      </Flex>
     </>
   );
 }
 
 export async function getServerSideProps() {
-    try {
-    
-        const today = new Date().toISOString(); 
-        
-  
-      const { data, error } = await supabase
-        .from('rents')
-        .select(`*, cars(*), profiles(*)`)
-        .order('created_at', { ascending: false })
-        .lte('endDate', today)
-        .eq('isFinished', false);
-        console.log(today);
-      return {
-        props: {
-          rents: data,
-        },
-      };
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const today = new Date().toISOString();
+
+    const { data, error } = await supabase
+      .from("rents")
+      .select(`*, cars(*), profiles(*)`)
+      .order("created_at", { ascending: false })
+      .lte("endDate", today)
+      .eq("status", 'during');
+    console.log(today);
+    return {
+      props: {
+        rents: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
   }
+}
