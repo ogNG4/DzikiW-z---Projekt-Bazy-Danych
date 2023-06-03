@@ -28,7 +28,6 @@ import { useRouter } from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
 
 export default function Car({ car }) {
-
   const { profile } = useUser();
   const router = useRouter();
   const session = useSession();
@@ -57,55 +56,55 @@ export default function Car({ car }) {
         <Box w={{ base: "90%", lg: "30%" }} h={"auto"} overflow={"hidden"}>
           <Image src={car.img} objectFit={"cover"} boxSize={"100%"} />
         </Box>
-      <SimpleGrid columns={2} gap={'1rem'} >
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Moc:
-          </Text>
-          <Text>{car.power} KM</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Pojemność:
-          </Text>
-          <Text>{car.capacity} CM3</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Kolor:
-          </Text>
-          <Text>{car.color}</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Typ:
-          </Text>
-          <Text>{car.type}</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Skrzynia biegów:
-          </Text>
-          <Text>{car.transmission}</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Rocznik:
-          </Text>
-          <Text>{car.year}</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Opis:
-          </Text>
-          <Text>{car.description}</Text>
-        </HStack>
-        <HStack spacing={4}>
-          <Text fontWeight="bold" color="gray.600">
-            Cena za dobę:
-          </Text>
-          <Text>{car.price} ZŁ</Text>
-        </HStack>
+        <SimpleGrid columns={2} gap={"1rem"}>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Moc:
+            </Text>
+            <Text>{car.power} KM</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Pojemność:
+            </Text>
+            <Text>{car.capacity} CM3</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Kolor:
+            </Text>
+            <Text>{car.color}</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Typ:
+            </Text>
+            <Text>{car.type}</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Skrzynia biegów:
+            </Text>
+            <Text>{car.transmission}</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Rocznik:
+            </Text>
+            <Text>{car.year}</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Opis:
+            </Text>
+            <Text>{car.description}</Text>
+          </HStack>
+          <HStack spacing={4}>
+            <Text fontWeight="bold" color="gray.600">
+              Cena za dobę:
+            </Text>
+            <Text>{car.price} ZŁ</Text>
+          </HStack>
         </SimpleGrid>
         <HStack>
           <Button

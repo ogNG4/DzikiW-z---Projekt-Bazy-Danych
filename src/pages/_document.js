@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head >
-        {/* <title>Dziki Wóz</title> */}
+        
         </Head>
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode}></ColorModeScript>

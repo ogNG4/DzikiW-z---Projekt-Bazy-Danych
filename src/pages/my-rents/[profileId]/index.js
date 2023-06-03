@@ -24,7 +24,7 @@ export default function MyRents({ rents }) {
         <Flex direction={"column"} gap={"1rem"} alignItems={"center"}>
           {rents &&
             rents.map((rent) => <RentDetailCard key={rent.id} rent={rent} />)}
-            {rents.length == 0 && <p>Brak wyników..</p>}
+          {rents.length == 0 && <p>Brak wyników..</p>}
         </Flex>
       </SectionWrapper>
     </>
@@ -38,7 +38,7 @@ export async function getServerSideProps({ params }) {
       .from("rents")
       .select(`*, cars(*)`)
       .eq("userId", profileId)
-      .eq('status', 'during');
+      .eq("status", "during");
 
     return {
       props: {

@@ -32,7 +32,7 @@ export default function RentDetailCard({ rent }) {
     <Flex
       direction={"column"}
       w={"50%"}
-      minH={"35vh"}
+      minH={"max-content"}
       p={"1rem"}
       justifyContent={"space-between"}
       bg={"gray.700"}

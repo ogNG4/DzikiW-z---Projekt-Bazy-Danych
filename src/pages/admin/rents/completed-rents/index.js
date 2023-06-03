@@ -1,23 +1,9 @@
 import { useAdmin } from "@/context/AdminContext";
 import { supabase } from "@/lib/supabase";
-import {
-  Heading,
-  Flex,
-  Card,
-  TableContainer,
-  Text,
-  VStack,
-  Table,
-  Thead,
-  Th,
-  Tr,
-  Tbody,
-  Td,
-  Box,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { dateToString } from "@/utils/dateToString";
+
 import SectionHeader from "@/components/UI/SectionHeader";
 import AdminRentDetailCard from "@/components/Admin/Rents/AdminRentDetailCard";
 
@@ -49,7 +35,7 @@ export async function getServerSideProps() {
       .select(`*, cars(*), profiles(*)`)
       .order("created_at", { ascending: false })
       .lte("endDate", today)
-      .eq("status", 'during');
+      .eq("status", "during");
     console.log(today);
     return {
       props: {

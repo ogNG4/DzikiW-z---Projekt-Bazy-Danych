@@ -1,20 +1,6 @@
 import { useAdmin } from "@/context/AdminContext";
 import { supabase } from "@/lib/supabase";
-import {
-  Heading,
-  Flex,
-  Card,
-  TableContainer,
-  Text,
-  VStack,
-  Table,
-  Thead,
-  Th,
-  Tr,
-  Tbody,
-  Td,
-  Box,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -48,7 +34,7 @@ export async function getServerSideProps() {
       .from("rents")
       .select(`*, cars(*), profiles(*)`)
       .order("created_at", { ascending: false })
-      .eq("status", 'canceled');
+      .eq("status", "canceled");
     console.log(today);
     return {
       props: {

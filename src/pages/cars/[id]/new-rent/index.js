@@ -50,21 +50,20 @@ export default function NewRentPage({ availableDates, carData }) {
       if (response.ok) {
         router.replace("/cars");
         toast({
-          title: 'Pomyślnie złożono rezerwację',
-          status: 'success',
+          title: "Pomyślnie złożono rezerwację",
+          status: "success",
           duration: 2000,
           isClosable: true,
-          position: 'top-right'
+          position: "top-right",
         });
-
       } else {
         console.log("Failed to create rental");
         toast({
-          title: 'Błąd',
-          status: 'error',
+          title: "Błąd",
+          status: "error",
           duration: 2000,
           isClosable: true,
-          position: 'top-right'
+          position: "top-right",
         });
       }
     } catch (error) {
@@ -97,7 +96,7 @@ export async function getServerSideProps({ params, req }) {
 
     const { data: carData } = await supabase
       .from("cars")
-      .select('model, brand, price, img')
+      .select("model, brand, price, img")
       .eq("id", id)
       .single();
 

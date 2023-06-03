@@ -1,5 +1,5 @@
 import MessageCard from "@/components/Admin/Messages/MessageCard";
-import { supabase } from "@/lib/supabase"
+import { supabase } from "@/lib/supabase";
 import { Box, Center, Flex, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useAdmin } from "@/context/AdminContext";
@@ -15,13 +15,19 @@ export default function UnreadMessages({ messages }) {
 
   return (
     <Box>
-        <Center m={'2rem'} fontSize={'3rem'}>
-            Wiadomości
-        </Center>
-    <Flex direction={'column'} w={'100%'} gap={'20px'} alignItems={'center'} p={'2rem'}>
-      {messages.map((message) => (
-        <MessageCard key={message.id} message={message}/>
-      ))}
+      <Center m={"2rem"} fontSize={"3rem"}>
+        Wiadomości
+      </Center>
+      <Flex
+        direction={"column"}
+        w={"100%"}
+        gap={"20px"}
+        alignItems={"center"}
+        p={"2rem"}
+      >
+        {messages.map((message) => (
+          <MessageCard key={message.id} message={message} />
+        ))}
       </Flex>
     </Box>
   );
@@ -29,7 +35,10 @@ export default function UnreadMessages({ messages }) {
 
 export async function getStaticProps() {
   try {
-    const { data } = await supabase.from("messages").select("*").order('created_at', { ascending: false });
+    const { data } = await supabase
+      .from("messages")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     return {
       props: {

@@ -3,7 +3,6 @@ import { supabase } from "@/lib/supabase";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { dateToString } from "@/utils/dateToString";
 import SectionHeader from "@/components/UI/SectionHeader";
 import AdminRentDetailCard from "@/components/Admin/Rents/AdminRentDetailCard";
 

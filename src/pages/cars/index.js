@@ -7,15 +7,8 @@ import SortForm from "@/components/User/CarsFilters/SortForm";
 
 import SectionHeader from "@/components/UI/SectionHeader";
 
-
 export default function Cars({ cars }) {
-
   const [sortOption, setSortOption] = useState("");
-
-  const onPageChange = (page) => {
-    setCurrentPage(page);
-  };
- 
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
@@ -30,7 +23,6 @@ export default function Cars({ cars }) {
     ["price-asc", (a, b) => a.price - b.price],
   ]);
 
-  // const sortedCars = paginatedPosts.sort(sortFunctions.get(sortOption) || (() => 0));
   const sortedCars = cars.sort(sortFunctions.get(sortOption) || (() => 0));
 
   return (
@@ -60,12 +52,6 @@ export default function Cars({ cars }) {
         {sortedCars.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
-        {/* <Pagination
-        items={cars.length} // 100
-        currentPage={currentPage} // 1
-        pageSize={pageSize} // 10
-        onPageChange={onPageChange}
-        /> */}
       </Grid>
     </Flex>
   );

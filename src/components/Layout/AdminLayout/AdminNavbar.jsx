@@ -17,10 +17,10 @@ import { useRouter } from "next/router";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Link } from "@chakra-ui/next-js";
 
-import { Logo } from "../Logo/Logo";
+
 
 export function AdminNavbar() {
-  // const { colorMode, toggleColorMode } = useColorMode();
+ 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const supabase = useSupabaseClient();
   const router = useRouter();

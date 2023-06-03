@@ -35,10 +35,10 @@ export async function getServerSideProps({ params }) {
   try {
     const { profileId } = params;
     const { data } = await supabase
-    .from("rents")
-    .select(`*, cars(*)`)
-    .eq("userId", profileId)
-    .in("status", ['finished', 'canceled']);
+      .from("rents")
+      .select(`*, cars(*)`)
+      .eq("userId", profileId)
+      .in("status", ["finished", "canceled"]);
     return {
       props: {
         rents: data,

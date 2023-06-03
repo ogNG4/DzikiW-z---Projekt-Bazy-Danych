@@ -1,4 +1,4 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+
 import { supabase } from "../../../lib/supabase";
 import { useEffect } from "react";
 import AdminCarCard from "@/components/Admin/Cars/CarCard/AdminCarCard";
@@ -7,9 +7,7 @@ import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useAdmin } from "@/context/AdminContext";
 
-
 export default function CarsList({ cars }) {
-
   const isAdmin = useAdmin();
   const router = useRouter();
 
@@ -28,12 +26,7 @@ export default function CarsList({ cars }) {
         alignItems={"center"}
       >
         {cars.map((car) => (
-          <AdminCarCard
-            key={car.id}
-            car={car}
-          
-           
-          />
+          <AdminCarCard key={car.id} car={car} />
         ))}
       </Flex>
     </>
@@ -41,9 +34,11 @@ export default function CarsList({ cars }) {
 }
 
 export async function getServerSideProps(context) {
- 
   try {
-    const { data } = await supabase.from("cars").select("*").order('created_at',{ascending: false});
+    const { data } = await supabase
+      .from("cars")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     return {
       props: {

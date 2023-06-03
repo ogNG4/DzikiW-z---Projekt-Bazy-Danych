@@ -5,7 +5,6 @@ import {
   Text,
   IconButton,
   Button,
-  Switch,
   useColorModeValue,
   useDisclosure,
   HStack,
@@ -16,7 +15,7 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  Spacer,
+  
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -25,11 +24,10 @@ import { Link } from "@chakra-ui/next-js";
 
 import { Logo } from "../Logo/Logo";
 import { useUser } from "@/context/UserContext";
-import Head from "next/head";
 
 
 export function UserNavbar() {
-  // const { colorMode, toggleColorMode } = useColorMode();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const supabase = useSupabaseClient();
