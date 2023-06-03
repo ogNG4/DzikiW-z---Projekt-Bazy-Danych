@@ -15,6 +15,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useToast
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Image } from "@chakra-ui/next-js";
@@ -36,6 +37,8 @@ export default function NewRentForm({
   const [showModal, setShowModal] = useState(false);
   const [count, setCount] = useState(0);
 
+  const toast = useToast();
+
   const onSubmitHandler = (data) => {
     onSubmit({ ...data, count });
     setShowModal(true);
@@ -43,21 +46,40 @@ export default function NewRentForm({
 
   const handleStartDateChange = (event) => {
     const selectedStartDate = event.target.value;
-    const isStartDateAvailable = availableDates.every((date) => {
-      const startDateOverlap =
-        selectedStartDate <= date.endDate &&
-        selectedStartDate >= date.startDate;
-      const endDateOverlap =
-        endDate <= date.endDate && endDate >= date.startDate;
-      const insideRange =
-        selectedStartDate >= date.startDate && endDate <= date.endDate;
-      return !startDateOverlap && !endDateOverlap && !insideRange;
-    });
-
-    if (isStartDateAvailable) {
-      setStartDate(selectedStartDate);
+    const today = new Date().toISOString().slice(0, 10);
+  
+    if (selectedStartDate >= today) {
+      const isStartDateAvailable = availableDates.every((date) => {
+        const startDateOverlap =
+          selectedStartDate <= date.endDate &&
+          selectedStartDate >= date.startDate;
+        const endDateOverlap =
+          endDate <= date.endDate && endDate >= date.startDate;
+        const insideRange =
+          selectedStartDate >= date.startDate && endDate <= date.endDate;
+        return !startDateOverlap && !endDateOverlap && !insideRange;
+      });
+  
+      if (isStartDateAvailable) {
+        setStartDate(selectedStartDate);
+      } else {
+        toast({
+          title: 'Wybrana data rozpoczęcia rezerwacji jest niedostępna.',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right'
+        });
+        console.log("Wybrana data rozpoczęcia rezerwacji jest niedostępna.");
+      }
     } else {
-      console.log("Wybrana data rozpoczęcia rezerwacji jest niedostępna.");
+      toast({
+        title: 'Wybrana data rozpoczęcia rezerwacji jest niedostępna',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right'
+      });
     }
   };
 
@@ -76,7 +98,14 @@ export default function NewRentForm({
     if (isEndDateAvailable) {
       setEndDate(selectedEndDate);
     } else {
-      console.log("Wybrana data zakończenia rezerwacji jest niedostępna.");
+      toast({
+        title: 'Wybrana data rozpoczęcia rezerwacji jest niedostępna',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right'
+      });
+      
     }
   };
 
@@ -84,18 +113,6 @@ export default function NewRentForm({
     handleSubmit(onSubmitHandler)();
     setShowModal(false);
   };
-  const today = new Date();
-  today.setDate(today.getDate() + 1);
-  const year = today.getFullYear();
-  let month = today.getMonth() + 1;
-  if (month < 10) {
-    month = "0" + month;
-  }
-  let day = today.getDate();
-  if (day < 10) {
-    day = "0" + day;
-  }
-  const minStartDate = `${year}-${month}-${day}`;
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -132,7 +149,6 @@ export default function NewRentForm({
               value={startDate}
               onChange={handleStartDateChange}
               max={endDate}
-              min={new Date().toISOString().slice(0, 16)}
             />
             {errors.startDate && errors.startDate.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>

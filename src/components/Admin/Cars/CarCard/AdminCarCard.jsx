@@ -6,7 +6,7 @@ export default function AdminCarCard({ car }) {
   const router = useRouter();
 
   const handleDelete = async () => {
-    const response = await fetch(/api/admin/cars/deleteCar/${car.id}, {
+    const response = await fetch(`/api/admin/cars/deleteCar/${car.id}`, {
       method: "DELETE",
     });
     if (response.ok) {

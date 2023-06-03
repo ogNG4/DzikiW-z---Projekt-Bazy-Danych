@@ -39,7 +39,6 @@ export default function CarCard({ car }) {
             <Text>Moc: {car.power} KM</Text>
             <Text>Pojemność: {car.capacity} cm3</Text>
             <Text>Cena za dobę: {car.price} PLN</Text>
-            <Text>Dostępny od: 21.05.2023</Text>
           </Flex>
           <Link  href={`/cars/${car.id}`}>
           <Button bg={'tomato'}>

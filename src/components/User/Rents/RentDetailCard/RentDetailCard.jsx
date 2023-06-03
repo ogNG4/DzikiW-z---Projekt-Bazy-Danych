@@ -9,11 +9,12 @@ export default function RentDetailCard({ rent }) {
   const isCurrentRentsPage = router.pathname === `/my-rents/[profileId]`;
 
   const handleUpdate = async () => {
-    router.reload();
+   
     const response = await fetch(`/api/user/cancel-rent/${rent.id}`, {
       method: "POST",
     });
     if (response.ok) {
+      router.reload();
     } else {
       console.error(response);
     }
@@ -71,6 +72,12 @@ export default function RentDetailCard({ rent }) {
             Do:
           </Text>
           <Text>{dateToString(rent.endDate)}</Text>
+        </VStack>
+        <VStack align={"left"}>
+          <Text fontSize={"1.2rem"} fontWeight={"500"}>
+           Status
+          </Text>
+          <Text>{rent.status}</Text>
         </VStack>
         {isCurrentRentsPage && isCancelable() && (
           <Button ml={"auto"} bg={"red.400"} onClick={handleUpdate}>

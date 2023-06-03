@@ -81,6 +81,7 @@ export function AdminNavbar() {
               <Flex flexDirection={"column"}>
                 <Link href="/admin/rents/current-rents">Aktualne rezerwacje</Link>
                 <Link href="/admin/rents/completed-rents">Zakończone rezerwacje</Link>
+                <Link href="/admin/rents/canceled-rents">Anulowane rezerwacje</Link>
                 <Link href="/admin/rents/rents-history">Historia rezerwacji</Link>
               </Flex>
             </AccordionPanel>
@@ -104,21 +105,7 @@ export function AdminNavbar() {
             </AccordionPanel>
           </AccordionItem>
 
-          <AccordionItem>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
-                Finanse
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-
-            <AccordionPanel pb={4}>
-              <Flex flexDirection={"column"}>
-                <Link href="/admin">Samochód</Link>
-                <Link href="/admin">Flota</Link>
-              </Flex>
-            </AccordionPanel>
-          </AccordionItem>
+         
         </Accordion>
         <Box>
           <Button bg={"red.400"} onClick={logoutHandler}>

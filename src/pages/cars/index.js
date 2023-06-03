@@ -4,18 +4,14 @@ import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { supabase } from "@/lib/supabase";
 import CarCard from "@/components/User/Cars/CarDetailCard/CarDetailCard";
 import SortForm from "@/components/User/CarsFilters/SortForm";
-import { useRouter } from "next/router";
+
 import SectionHeader from "@/components/UI/SectionHeader";
-import Pagination from "@/components/Pagination/Pagination";
-import { paginate } from "@/utils/paginate";
+
 
 export default function Cars({ cars }) {
-  // console.log(cars);
+
   const [sortOption, setSortOption] = useState("");
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const pageSize = 10;
-  // const paginatedPosts = paginate(cars, currentPage, pageSize);
- 
+
   const onPageChange = (page) => {
     setCurrentPage(page);
   };
