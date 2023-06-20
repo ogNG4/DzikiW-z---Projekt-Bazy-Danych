@@ -105,6 +105,24 @@ export function AdminNavbar() {
             </AccordionPanel>
           </AccordionItem>
 
+          <AccordionItem>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Użytkownicy
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+
+            <AccordionPanel pb={4}>
+              <Flex flexDirection={"column"}>
+                <Link href="/admin/users">
+                  Klienci
+                </Link>
+                <Link href="/admin/admins">Administratorzy</Link>
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+
          
         </Accordion>
         <Box>
