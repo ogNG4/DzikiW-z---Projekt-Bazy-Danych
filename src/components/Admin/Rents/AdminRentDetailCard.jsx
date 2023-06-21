@@ -1,9 +1,10 @@
 import { dateToString } from "@/utils/dateToString";
-import { Flex, HStack, Text, Box, Button } from "@chakra-ui/react";
+import { Flex, HStack, Text, Box, Button, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-
 export default function AdminRentDetailCard({ rent, showButton }) {
+
   const router = useRouter();
+  const toast = useToast();
   console.log(showButton);
 
   const handleUpdate = async () => {
