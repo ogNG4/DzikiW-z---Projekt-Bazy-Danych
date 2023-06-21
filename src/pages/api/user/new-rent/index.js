@@ -9,6 +9,7 @@ export default async function newRentHandler(req, res) {
       .from("rents")
       .select()
       .eq("carId", body.carId)
+      .eq("status","during")
       .lte("startDate", body.endDate)
       .gte("endDate", body.startDate);
 

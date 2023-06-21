@@ -92,7 +92,8 @@ export async function getServerSideProps({ params, req }) {
     const { data: rentData } = await supabase
       .from("rents")
       .select(`startDate, endDate`)
-      .eq("carId", id);
+      .eq("carId", id)
+      .eq("status","during");
 
     const { data: carData } = await supabase
       .from("cars")

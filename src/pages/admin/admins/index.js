@@ -33,7 +33,7 @@ export default function Admins({ profiles }) {
       <SectionHeader title={"administratorzy"} />
       <Flex direction={"column"} gap={"1rem"} alignItems={"center"}>
         {profiles.map((profile) => (
-            <Flex direction={"column"} alignItems={"center"}>
+            <Flex direction={"column"} alignItems={"center"} key={profile.id} >
                 <Box>{profile.email}</Box>
             </Flex>
         ))}
