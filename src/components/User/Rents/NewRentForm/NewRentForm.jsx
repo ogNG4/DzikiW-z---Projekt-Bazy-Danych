@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {
   Box,
   Button,
+  Checkbox,
   Flex,
   FormControl,
   FormLabel,
@@ -15,7 +16,8 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useToast
+  useToast,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Image } from "@chakra-ui/next-js";
@@ -38,7 +40,8 @@ export default function NewRentForm({
   const [count, setCount] = useState(0);
 
   const toast = useToast();
-
+  const [isTooltipOpen1, setIsTooltipOpen1] = useState(false);
+  const [isTooltipOpen2, setIsTooltipOpen2] = useState(false);
   const onSubmitHandler = (data) => {
     onSubmit({ ...data, count });
     setShowModal(true);
@@ -47,7 +50,7 @@ export default function NewRentForm({
   const handleStartDateChange = (event) => {
     const selectedStartDate = event.target.value;
     const today = new Date().toISOString().slice(0, 10);
-  
+
     if (selectedStartDate >= today) {
       const isStartDateAvailable = availableDates.every((date) => {
         const startDateOverlap =
@@ -59,26 +62,26 @@ export default function NewRentForm({
           selectedStartDate >= date.startDate && endDate <= date.endDate;
         return !startDateOverlap && !endDateOverlap && !insideRange;
       });
-  
+
       if (isStartDateAvailable) {
         setStartDate(selectedStartDate);
       } else {
         toast({
-          title: 'Wybrana data rozpoczęcia rezerwacji jest niedostępna.',
-          status: 'error',
+          title: "Wybrana data rozpoczęcia rezerwacji jest niedostępna.",
+          status: "error",
           duration: 2000,
           isClosable: true,
-          position: 'top-right'
+          position: "top-right",
         });
         console.log("Wybrana data rozpoczęcia rezerwacji jest niedostępna.");
       }
     } else {
       toast({
-        title: 'Wybrana data rozpoczęcia rezerwacji jest niedostępna',
-        status: 'error',
+        title: "Wybrana data rozpoczęcia rezerwacji jest niedostępna",
+        status: "error",
         duration: 2000,
         isClosable: true,
-        position: 'top-right'
+        position: "top-right",
       });
     }
   };
@@ -99,13 +102,12 @@ export default function NewRentForm({
       setEndDate(selectedEndDate);
     } else {
       toast({
-        title: 'Wybrana data rozpoczęcia rezerwacji jest niedostępna',
-        status: 'error',
+        title: "Wybrana data rozpoczęcia rezerwacji jest niedostępna",
+        status: "error",
         duration: 2000,
         isClosable: true,
-        position: 'top-right'
+        position: "top-right",
       });
-      
     }
   };
 
@@ -164,6 +166,40 @@ export default function NewRentForm({
             {errors.endDate && errors.endDate.type === "required" && (
               <Text color={"yellow.200"}>To pole jest wymagane</Text>
             )}
+
+            <FormLabel>Odbiór</FormLabel>
+            <Tooltip
+              isOpen={isTooltipOpen1}
+              onClose={() => setIsTooltipOpen1(false)}
+              label="Aktualnie dostępny jest tylko odbiór osobisty"
+              aria-label="A tooltip"
+            >
+              <Checkbox
+                defaultChecked
+                isDisabled
+                mr="0.5rem"
+                onMouseEnter={() => setIsTooltipOpen1(true)}
+                onMouseLeave={() => setIsTooltipOpen1(false)}
+              >
+                Osobisty
+              </Checkbox>
+            </Tooltip>
+
+            <Tooltip
+              isOpen={isTooltipOpen2}
+              onClose={() => setIsTooltipOpen2(false)}
+              label="Odbiór na adres jest niedostępny"
+              aria-label="A tooltip"
+            >
+              <Checkbox
+                disabled
+                onMouseEnter={() => setIsTooltipOpen2(true)}
+                onMouseLeave={() => setIsTooltipOpen2(false)}
+              >
+                Na adres
+              </Checkbox>
+            </Tooltip>
+
             <FormLabel>Imię</FormLabel>
             <Input
               type="text"
