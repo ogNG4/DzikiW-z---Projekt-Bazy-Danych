@@ -17,6 +17,17 @@ export default function AdminRentDetailCard({ rent, showButton }) {
     }
   };
 
+  const handleDelete = async () => {
+    router.reload();
+    const response = await fetch(`/api/admin/rents/delete-rent/${rent.id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+    } else {
+      console.error(response);
+    }
+  };
+
   const isCurrentRentsPage = router.pathname === "/admin/rents/completed-rents";
 
   return (
@@ -123,6 +134,9 @@ export default function AdminRentDetailCard({ rent, showButton }) {
         { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleUpdate}>
           Zatwierdź
         </Button>}
+        <Button onClick={handleDelete}>
+        Usuń
+        </Button>
       </Box>
     </Flex>
   );
