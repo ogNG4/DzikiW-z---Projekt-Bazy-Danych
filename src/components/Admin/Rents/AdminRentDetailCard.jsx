@@ -136,7 +136,9 @@ export default function AdminRentDetailCard({ rent, showButton }) {
       { isCompletedRentsPage && <Button bg={"tomato"} onClick={handleUpdate}>
           Zatwierdź
         </Button>}
-
+        { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleUpdate} mb="0.5rem">
+          Zatwierdź
+        </Button>}
         { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleDelete}>
           Anuluj
         </Button>}
