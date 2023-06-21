@@ -2,7 +2,6 @@ import { dateToString } from "@/utils/dateToString";
 import { Flex, HStack, Text, Box, Button, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 export default function AdminRentDetailCard({ rent, showButton }) {
-
   const router = useRouter();
   const toast = useToast();
   console.log(showButton);
@@ -29,7 +28,8 @@ export default function AdminRentDetailCard({ rent, showButton }) {
     }
   };
 
-  const isCompletedRentsPage = router.pathname === "/admin/rents/completed-rents";
+  const isCompletedRentsPage =
+    router.pathname === "/admin/rents/completed-rents";
   const isCurrentRentsPage = router.pathname === "/admin/rents/current-rents";
 
   return (
@@ -133,15 +133,21 @@ export default function AdminRentDetailCard({ rent, showButton }) {
       </Flex>
 
       <Box>
-      { isCompletedRentsPage && <Button bg={"tomato"} onClick={handleUpdate}>
-          Zatwierdź
-        </Button>}
-        { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleUpdate} mb="0.5rem">
-          Zatwierdź
-        </Button>}
-        { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleDelete}>
-          Anuluj
-        </Button>}
+        {isCompletedRentsPage && (
+          <Button bg={"tomato"} onClick={handleUpdate}>
+            Zatwierdź
+          </Button>
+        )}
+        {isCurrentRentsPage && (
+          <Button bg={"tomato"} onClick={handleUpdate} mb="0.5rem">
+            Zatwierdź
+          </Button>
+        )}
+        {isCurrentRentsPage && (
+          <Button bg={"tomato"} onClick={handleDelete}>
+            Anuluj
+          </Button>
+        )}
       </Box>
     </Flex>
   );
