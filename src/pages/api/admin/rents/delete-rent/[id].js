@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     try {
       const { error } = await supabase
         .from("rents")
-        .delete()
+        .update({ status: "canceled" })
         .eq("id", id);
       if (error) {
         throw error;

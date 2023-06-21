@@ -28,7 +28,8 @@ export default function AdminRentDetailCard({ rent, showButton }) {
     }
   };
 
-  const isCurrentRentsPage = router.pathname === "/admin/rents/completed-rents";
+  const isCompletedRentsPage = router.pathname === "/admin/rents/completed-rents";
+  const isCurrentRentsPage = router.pathname === "/admin/rents/current-rents";
 
   return (
     <Flex
@@ -131,12 +132,13 @@ export default function AdminRentDetailCard({ rent, showButton }) {
       </Flex>
 
       <Box>
-        { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleUpdate}>
+      { isCompletedRentsPage && <Button bg={"tomato"} onClick={handleUpdate}>
           Zatwierdź
         </Button>}
-        <Button onClick={handleDelete}>
-        Usuń
-        </Button>
+
+        { isCurrentRentsPage && <Button bg={"tomato"} onClick={handleDelete}>
+          Anuluj
+        </Button>}
       </Box>
     </Flex>
   );
