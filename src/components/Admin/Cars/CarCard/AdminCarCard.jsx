@@ -1,10 +1,10 @@
-import { Card, Flex, HStack, Text, Button } from "@chakra-ui/react";
+import { Card, Flex, HStack, Text, Button, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function AdminCarCard({ car }) {
   const fontProps = { fontSize: "1rem", fontWeight: "500" };
   const router = useRouter();
-
+  const toast = useToast();
   const handleDelete = async () => {
     const response = await fetch(`/api/admin/cars/deleteCar/${car.id}`, {
       method: "DELETE",
