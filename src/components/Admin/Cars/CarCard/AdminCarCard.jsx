@@ -74,6 +74,11 @@ export default function AdminCarCard({ car }) {
             <Text>{car.price}</Text>
             <Text style={fontProps}> ZŁ</Text>
           </HStack>
+          <HStack>
+            <Text style={fontProps}>Koszt utrzymania:</Text>
+            <Text>{car.upkeep}</Text>
+            <Text style={fontProps}> ZŁ</Text>
+          </HStack>
         </Flex>
         <Flex w={"50%"} overflow={"auto"}>
           <Text>{car.description}</Text>
