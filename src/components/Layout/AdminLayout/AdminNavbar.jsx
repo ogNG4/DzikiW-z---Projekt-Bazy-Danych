@@ -17,10 +17,7 @@ import { useRouter } from "next/router";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Link } from "@chakra-ui/next-js";
 
-
-
 export function AdminNavbar() {
- 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const supabase = useSupabaseClient();
   const router = useRouter();
@@ -79,10 +76,18 @@ export function AdminNavbar() {
 
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/admin/rents/current-rents">Aktualne rezerwacje</Link>
-                <Link href="/admin/rents/completed-rents">Zakończone rezerwacje</Link>
-                <Link href="/admin/rents/canceled-rents">Anulowane rezerwacje</Link>
-                <Link href="/admin/rents/rents-history">Historia rezerwacji</Link>
+                <Link href="/admin/rents/current-rents">
+                  Aktualne rezerwacje
+                </Link>
+                <Link href="/admin/rents/completed-rents">
+                  Zakończone rezerwacje
+                </Link>
+                <Link href="/admin/rents/canceled-rents">
+                  Anulowane rezerwacje
+                </Link>
+                <Link href="/admin/rents/rents-history">
+                  Historia rezerwacji
+                </Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>
@@ -100,7 +105,7 @@ export function AdminNavbar() {
                 <Link href="/admin/unread-messages">
                   Wiadomości nieodczytane
                 </Link>
-                <Link href="/">Wiadomości odczytane</Link>
+                <Link href="/admin/read-messages">Wiadomości odczytane</Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>
@@ -115,15 +120,11 @@ export function AdminNavbar() {
 
             <AccordionPanel pb={4}>
               <Flex flexDirection={"column"}>
-                <Link href="/admin/users">
-                  Klienci
-                </Link>
+                <Link href="/admin/users">Klienci</Link>
                 <Link href="/admin/admins">Administratorzy</Link>
               </Flex>
             </AccordionPanel>
           </AccordionItem>
-
-         
         </Accordion>
         <Box>
           <Button bg={"red.400"} onClick={logoutHandler}>

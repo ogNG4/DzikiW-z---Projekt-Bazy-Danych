@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useAdmin } from "@/context/AdminContext";
 import { useRouter } from "next/router";
 
-export default function UnreadMessages({ messages }) {
+export default function ReadMessages({ messages }) {
   const isAdmin = useAdmin();
   const router = useRouter();
 
@@ -16,7 +16,7 @@ export default function UnreadMessages({ messages }) {
   return (
     <Box>
       <Center m={"2rem"} fontSize={"3rem"}>
-        Wiadomości nieodczytane
+        Wiadomości odczytane
       </Center>
       <Flex
         direction={"column"}
@@ -38,13 +38,14 @@ export async function getServerSideProps() {
     const { data } = await supabase
       .from("messages")
       .select("*")
-      .eq("status", "unread")
+      .eq("status", "read")
       .order("created_at", { ascending: false });
 
     return {
       props: {
         messages: data,
       },
+
     };
   } catch (error) {
     console.log(error);
