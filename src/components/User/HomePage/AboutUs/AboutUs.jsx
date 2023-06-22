@@ -1,5 +1,6 @@
 import { Text, Flex, Image, Button, Box, Grid } from "@chakra-ui/react";
 import AboutUsCard from "./AboutUsCard";
+import React from "react";
 
 const ABOUT_US = [
   {
@@ -7,11 +8,22 @@ const ABOUT_US = [
     text: `Wypożyczalnia samochodowa oferuje wygodę jako kluczowy atut dla swoich klientów. Dzięki naszej usłudze wypożyczania samochodów, nasi klienci mogą cieszyć się łatwym i dogodnym dostępem do pojazdów, które spełniają ich potrzeby.
 
 Oto dlaczego wygoda jest naszym wyróżniającym elementem:
-- Rezerwacja online: Zapewniamy intuicyjną platformę online, gdzie klienci mogą łatwo przeglądać dostępne samochody, sprawdzać ich dostępność w czasie rzeczywistym oraz dokonywać rezerwacji w dogodny dla siebie sposób. To pozwala zaoszczędzić czas i eliminuje konieczność osobistego wizyty w biurze wypożyczalni.
-- Szeroki wybór pojazdów: Nasza firma oferuje różnorodność modeli samochodów, aby sprostać różnym preferencjom i potrzebom klientów. Bez względu na to, czy ktoś potrzebuje kompaktowego auta na wypad weekendowy, czy przestronnego SUV-a na rodzinne wakacje, mamy odpowiedni pojazd do zaoferowania.
-- Odbiór i zwrot samochodu: Dążymy do zapewnienia jak największej wygody naszym klientom. Oferujemy elastyczne opcje odbioru i zwrotu samochodów. Klienci mogą wybrać dogodne miejsce odbioru i zwrotu, takie jak lotnisko, dworzec kolejowy czy inna wybrana lokalizacja, co umożliwia im bezproblemowe podróżowanie od razu po przyjeździe.
+
+- Rezerwacja online: Zapewniamy intuicyjną platformę online, gdzie klienci mogą łatwo przeglądać dostępne samochody, sprawdzać ich dostępność w czasie rzeczywistym oraz dokonywać rezerwacji w dogodny dla siebie sposób. 
+  
+  To pozwala zaoszczędzić czas i eliminuje konieczność osobistego wizyty w biurze wypożyczalni.
+
+- Szeroki wybór pojazdów: Nasza firma oferuje różnorodność modeli samochodów, aby sprostać różnym preferencjom i potrzebom klientów. 
+  
+  Bez względu na to, czy ktoś potrzebuje kompaktowego auta na wypad weekendowy, czy przestronnego SUV-a na rodzinne wakacje, mamy odpowiedni pojazd do zaoferowania.
+
+- Odbiór i zwrot samochodu: Dążymy do zapewnienia jak największej wygody naszym klientom. Oferujemy elastyczne opcje odbioru i zwrotu samochodów. 
+
+  Klienci mogą wybrać dogodne miejsce odbioru i zwrotu, takie jak lotnisko, dworzec kolejowy czy inna wybrana lokalizacja, co umożliwia im bezproblemowe podróżowanie od razu po przyjeździe.
+
 - Przejrzysta polityka wynajmu: Nasza firma stawia na przejrzystość i uczciwość. Zasady wynajmu są jasno określone, a umowy są czytelne i zrozumiałe. Klienci nie muszą obawiać się ukrytych opłat ani niejasności dotyczących warunków wynajmu.`,
   },
+
   {
     title: "Serwis 24/7",
     text: `Nasza firma zapewnia serwis samochodowy dostępny 24 godziny na dobę, 7 dni w tygodniu. Zależy nam na tym, aby nasi klienci mieli pewność, że w razie jakiejkolwiek awarii lub problemu z samochodem, mogą liczyć na naszą pomoc.
@@ -25,7 +37,6 @@ Oto dlaczego nasz serwis 24/7 jest niezwykle wartościowy:
 - Mobilność bez przeszkód: Dzięki naszemu serwisowi 24/7, nasi klienci nie muszą martwić się o ewentualne przestoje w podróży z powodu problemów technicznych. Bez względu na miejsce i czas, nasz zespół serwisowy jest gotowy, aby zapewnić niezbędną pomoc i przywrócić samochód do pełnej sprawności.
 
 - Bezpieczeństwo i spokój: Wiedza o tym, że nasza firma oferuje serwis samochodowy przez całą dobę, daje klientom poczucie bezpieczeństwa i spokoju. Mogą cieszyć się podróżą, mając pewność, że w razie potrzeby mogą liczyć na naszą kompleksową i niezawodną obsługę.`,
-
   },
   {
     title: "Bezpieczeństwo",
@@ -43,12 +54,11 @@ Oto dlaczego nasz serwis 24/7 jest niezwykle wartościowy:
 
 Dla nas bezpieczeństwo to nie tylko słowo - to fundament naszej działalności. Robimy wszystko, co w naszej mocy, aby nasi klienci czuli się bezpiecznie i zaufali nam podczas korzystania z naszych usług wypożyczalni samochodów.`,
   },
- 
 ];
 function AboutUs() {
   return (
     <>
-      <Flex flexDirection={"column"} alignItems={"center"} my={"5rem"} >
+      <Flex flexDirection={"column"} alignItems={"center"} my={"5rem"}>
         <Box w={"max-content"}>
           <Text
             fontSize={{ base: "1.6rem", md: "2.7rem" }}
@@ -59,11 +69,15 @@ function AboutUs() {
             Dlaczego my?
           </Text>
         </Box>
-        <Grid templateColumns={{base: '1fr', md:'1fr 1fr 1fr'}} gap={6} mt={"3rem"} p={"1rem"}>
-    
-            {ABOUT_US.map((item) => (
-                <AboutUsCard key={item.title} title={item.title} text={item.text} />
-            ))}
+        <Grid
+          templateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
+          gap={6}
+          mt={"3rem"}
+          p={"1rem"}
+        >
+          {ABOUT_US.map((item) => (
+            <AboutUsCard key={item.title} title={item.title} text={item.text} />
+          ))}
         </Grid>
       </Flex>
     </>
