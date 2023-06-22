@@ -21,7 +21,9 @@ Oto dlaczego wygoda jest naszym wyróżniającym elementem:
 
   Klienci mogą wybrać dogodne miejsce odbioru i zwrotu, takie jak lotnisko, dworzec kolejowy czy inna wybrana lokalizacja, co umożliwia im bezproblemowe podróżowanie od razu po przyjeździe.
 
-- Przejrzysta polityka wynajmu: Nasza firma stawia na przejrzystość i uczciwość. Zasady wynajmu są jasno określone, a umowy są czytelne i zrozumiałe. Klienci nie muszą obawiać się ukrytych opłat ani niejasności dotyczących warunków wynajmu.`,
+- Przejrzysta polityka wynajmu: Nasza firma stawia na przejrzystość i uczciwość. Zasady wynajmu są jasno określone, a umowy są czytelne i zrozumiałe. Klienci nie muszą obawiać się ukrytych opłat ani niejasności dotyczących warunków wynajmu.
+
+- Przyjazne ceny i promocje: W naszej wypożyczalni samochodowej dbamy o to, aby nasze ceny były konkurencyjne i dostępne dla różnych grup klientów. Regularnie oferujemy atrakcyjne promocje i rabaty, które umożliwiają naszym klientom jeszcze większą oszczędność. Podróżowanie samochodem będzie dużo wygodniejsze.`,
   },
 
   {
@@ -36,7 +38,11 @@ Oto dlaczego nasz serwis 24/7 jest niezwykle wartościowy:
 
 - Mobilność bez przeszkód: Dzięki naszemu serwisowi 24/7, nasi klienci nie muszą martwić się o ewentualne przestoje w podróży z powodu problemów technicznych. Bez względu na miejsce i czas, nasz zespół serwisowy jest gotowy, aby zapewnić niezbędną pomoc i przywrócić samochód do pełnej sprawności.
 
-- Bezpieczeństwo i spokój: Wiedza o tym, że nasza firma oferuje serwis samochodowy przez całą dobę, daje klientom poczucie bezpieczeństwa i spokoju. Mogą cieszyć się podróżą, mając pewność, że w razie potrzeby mogą liczyć na naszą kompleksową i niezawodną obsługę.`,
+- Bezpieczeństwo i spokój: Wiedza o tym, że nasza firma oferuje serwis samochodowy przez całą dobę, daje klientom poczucie bezpieczeństwa i spokoju. Mogą cieszyć się podróżą, mając pewność, że w razie potrzeby mogą liczyć na naszą kompleksową i niezawodną obsługę.
+
+- Regularne przeglądy i konserwacja: Nasz serwis samochodowy nie ogranicza się tylko do napraw awaryjnych. Oferujemy również regularne przeglądy i konserwację pojazdów, które pozwalają uniknąć potencjalnych problemów i utrzymać samochody naszych klientów w optymalnym stanie technicznym. 
+  
+  Dzięki temu, mogą cieszyć się długotrwałą wydajnością i bezpieczeństwem na drodze.`,
   },
   {
     title: "Bezpieczeństwo",
