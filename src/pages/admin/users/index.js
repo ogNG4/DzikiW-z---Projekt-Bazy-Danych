@@ -1,106 +1,36 @@
 import { useAdmin } from "@/context/AdminContext";
 import { supabase } from "@/lib/supabase";
-import {
-  Heading,
-  Flex,
-  Card,
-  TableContainer,
-  Text,
-  VStack,
-  Table,
-  Thead,
-  Th,
-  Tr,
-  Tbody,
-  Td,
-  Box,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-import { useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import SectionHeader from "@/components/UI/SectionHeader";
-
+import UserCard from "@/components/Admin/Users/UserCard";
 
 export default function Users({ profiles }) {
   const isAdmin = useAdmin();
   const router = useRouter();
 
-  const [highlightedId, setHighlightedId] = useState(null);
-  const handleMouseEnter = (profileId) => {
-    setHighlightedId(profileId);
-  };
-
-  const handleMouseLeave = () => {
-    setHighlightedId(null);
-  };
-  
-
   useEffect(() => {
     !isAdmin ? router.replace("/") : null;
   }, []);
-  
-    return (
-      <Flex direction="column" gap="1rem" alignItems="center">
-      <Text fontSize="3xl" fontWeight="bold" textAlign="center">
-        Klienci
-      </Text>
+
+  return (
+    <Flex direction="column" gap="1rem" alignItems="center">
+      <SectionHeader title="Użytkownicy" />
       {profiles.map((profile) => (
-        <Flex
-          key={profile.id}
-          bg="gray.200"
-          p="1rem"
-          borderRadius=".5rem"
-          alignItems="flex-start"
-          w="100%"
-          cursor="pointer"
-          _hover={{ bg: "gray.300" }}
-          onMouseEnter={() => handleMouseEnter(profile.id)}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Flex direction="column" w="50%">
-            <Text
-              fontSize="xl"
-              fontWeight={highlightedId === profile.id ? "bold" : "normal"}
-              color={highlightedId === profile.id ? "black" : "gray.700"}
-            >
-              Nazwa użytkownika:
-            </Text>
-            <Text
-              fontSize="xl"
-              fontWeight={highlightedId === profile.id ? "bold" : "normal"}
-              color={highlightedId === profile.id ? "black" : "gray.700"}
-            >
-              Adres e-mail:
-            </Text>
-          </Flex>
-          <Flex direction="column" w="50%">
-            <Text
-              fontSize="xl"
-              fontWeight={highlightedId === profile.id ? "bold" : "normal"}
-              color={highlightedId === profile.id ? "black" : "gray.700"}
-            >
-              {highlightedId === profile.id ? profile.firstName : ""}
-            </Text>
-            <Text
-              fontSize="xl"
-              fontWeight={highlightedId === profile.id ? "bold" : "normal"}
-              color={highlightedId === profile.id ? "black" : "gray.700"}
-            >
-              {highlightedId === profile.id ? profile.email : ""}
-            </Text>
-          </Flex>
-        </Flex>
+        <UserCard key={profile.id} profile={profile} />
       ))}
     </Flex>
   );
-};
+}
 
 export async function getServerSideProps() {
   try {
     const { data, error } = await supabase
       .from("profiles")
       .select()
-      .eq("isAdmin",false)
+      .eq("isAdmin", false);
     return {
       props: {
         profiles: data,
