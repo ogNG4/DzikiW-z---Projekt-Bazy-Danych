@@ -17,6 +17,17 @@ export default function AdminRentDetailCard({ rent, showButton }) {
     }
   };
 
+  const handleCancel = async () => {
+    router.reload();
+    const response = await fetch(`/api/admin/rents/cancel-rent/${rent.id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+    } else {
+      console.error(response);
+    }
+  };
+
   const handleDelete = async () => {
     router.reload();
     const response = await fetch(`/api/admin/rents/delete-rent/${rent.id}`, {
@@ -28,9 +39,12 @@ export default function AdminRentDetailCard({ rent, showButton }) {
     }
   };
 
-  const isCompletedRentsPage =
-    router.pathname === "/admin/rents/completed-rents";
+  const isCompletedRentsPage = router.pathname === "/admin/rents/completed-rents";
   const isCurrentRentsPage = router.pathname === "/admin/rents/current-rents";
+  const isCanceledRentsPage = router.pathname === "/admin/rents/canceled-rents";
+  const isRentsHistoryPage = router.pathname === "/admin/rents/rents-history";
+
+  
 
   return (
     <Flex
@@ -144,8 +158,13 @@ export default function AdminRentDetailCard({ rent, showButton }) {
           </Button>
         )}
         {isCurrentRentsPage && (
-          <Button bg={"tomato"} onClick={handleDelete}>
+          <Button bg={"tomato"} onClick={handleCancel}>
             Anuluj
+          </Button>
+        )}
+         {(isCanceledRentsPage || isRentsHistoryPage )&& (
+          <Button bg={"tomato"} onClick={handleDelete}>
+            Usuń
           </Button>
         )}
       </Box>
